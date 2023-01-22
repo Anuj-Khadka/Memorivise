@@ -1,0 +1,15 @@
+1. Voice recogination in testing
+2. Voice recorder and recorder
+3. Text or documenmts storing
+4. Mistakes identifying function
+5. Group discussion functions
+
+
+Functions:
+1. Make  a voice recorder that converts voice into text and also text or description option
+2. After adding this will hide
+3. Then Test
+4. Same as voice recoginized or text
+5. After that check words wrong or right
+6. If right then say remembered or wrong then show wrong places
+
