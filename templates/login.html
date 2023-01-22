@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+{% block title %} 
+<title>Login - Memorivise </title>
+{% endblock %}
+
+
+{% block body %} 
+<h1> Welcome to Memorivise </h1>
+<form action="/login" method="post">
+    <label for="username">Username:</label>
+    <input type="text" id="username" name="username">
+    <br>
+    <label for="password">Password:</label>
+    <input type="password" id="password" name="password">
+    <br>
+    <br>
+    <a href="/forgot-password">Forgot Password?</a>
+    <br><br>
+    <input type="submit" value="Login">
+    <input type="submit" value="SignUp">
+  </form> 
+  
+{% endblock %} 
