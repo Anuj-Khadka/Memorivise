@@ -1,5 +1,5 @@
 {% extends 'base.html' %} {% block title %}
-<title>Home - Memorivise</title>
+<title>Update - Memorivise</title>
 {% endblock %} {% block body %}
 <nav class="navbar navbar-expand-lg bg-body-tertiary">
   <div class="container-fluid">
@@ -30,7 +30,7 @@
   </div>
 </nav>
 <div class="container">
-  <form class="mt-5" method="POST" action="/">
+  <form class="mt-5" method="POST" action="/update/{{update.id}}">
     <div class="mb-3">
       <label for="title" class="form-label">Title</label>
       <input
@@ -39,39 +39,21 @@
         name="title"
         id="title"
         aria-describedby="emailHelp"
+        value="{{update.title}}"
       />
     </div>
     <div class="mb-3">
       <label for="decsription" class="form-label">Description</label>
-      <textarea class="form-control" name="description" id="description" rows="3"></textarea>
+      <textarea
+        class="form-control"
+        name="description"
+        id="description"
+        rows="3"
+      >
+      {{update.description}}
+    </textarea>
     </div>
     <button type="submit" id="submit" class="btn btn-primary">Submit</button>
   </form>
-
-  <div class="revive-card-container my-5 container">
-    <h3>Revise Cards</h3>
-    <div class="revise-cards mt-3">
-      <div class="row card-row d-flex">
-
-        {% if revisions|length < 1 %}
-        <h6 class="lead"> there are no saved cards available.</h6>
-        {% else%}
-        {% for revision in revisions %}
-        <div class="card me-2 mb-4 col-lg-4">
-          <div class="card-body">
-            <h5 class="card-title">{{ revision.title }}</h5>
-            <p class="card-text card-desc">
-                {{ revision.description }}
-            </p>
-            <a href="#" class="card-link">Revise</a>
-            <a href="/update/{{revision.id}}" class="card-link">Update</a>
-            <a href="/delete/{{revision.id}}" class="card-link">Delete</a>
-          </div>
-        </div>
-        {% endfor %}
-        {% endif %}
-      </div>
-    </div>
-  </div>
 </div>
 {% endblock %}

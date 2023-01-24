@@ -5,8 +5,6 @@ from datetime import datetime
 app = Flask(__name__)
 app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///test.db"
 db = SQLAlchemy(app)
-db.app = app
-
 
 class revise(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -18,14 +16,12 @@ class revise(db.Model):
         return f'{self.id} - {self.text}'
 
 
-
-
 @app.route("/", methods=['POST', 'GET'])
 def index():
     if request.method == 'POST':
         revise_title = request.form['title']
         revise_description = request.form['description']
-        new_revise = revise(title = revise_title, description=revise_description)
+        new_revise = revise(title=revise_title, description=revise_description)
 
         try:
             db.session.add(new_revise)
@@ -39,7 +35,6 @@ def index():
         return render_template('index.html', revisions=revisions)
 
 
-
 @app.route("/delete/<int:id>")
 def delete(id):
     card_to_delete = revise.query.get(id)
@@ -51,10 +46,26 @@ def delete(id):
 
     except:
         return "there was a problem deleting the card."
-    
 
 
+@app.route("/update/<int:id>", methods=['POST', 'GET'])
+def update(id):
+    update = revise.query.get_or_404(id)
 
-if __name__=="__main__":
+    if request.method == 'POST':
+        update.title = request.form['title']
+        update.description = request.form['description']
+
+        try:
+            db.session.commit()
+            return redirect('/')
+
+        except:
+            return "Sorry! there was a problem updating the card"
+
+    else:
+        return render_template("update.html", update=update)
+
+
+if __name__ == "__main__":
     app.run(debug=True)
-
