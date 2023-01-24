@@ -1,24 +1,41 @@
-{% extends 'base.html' %}
+{% extends 'base.html' %} {% block title %}
+<title>Login - Memorivise</title>
+{% endblock %} {% block body %}
+<div class="container">
+  <h1>Welcome to Memorivise</h1>
 
-{% block title %} 
-<title>Login - Memorivise </title>
-{% endblock %}
+  <form class="mt-5 col-lg-6 mx-auto" action="/login" method="post">
+    <div class="mb-3">
+      <label for="email" class="form-label">Email</label>
+      <input
+        type="email"
+        class="form-control"
+        name="email"
+        id="email"
+        placeholder="example@gmail.com"
+        aria-describedby="emailHelp"
+      />
+      <div id="emailHelp" class="form-text">
+        We'll never share your email with anyone else.
+      </div>
+    </div>
+    <div class="mb-3">
+      <label for="password" class="form-label">Password</label>
+      <input
+        type="password"
+        class="form-control"
+        name="password"
+        id="password"
+      />
+    </div>
 
-
-{% block body %} 
-<h1> Welcome to Memorivise </h1>
-<form action="/login" method="post">
-    <label class="form-label" for="username">Username:</label>
-    <input class="form-control" type="text" id="username" name="username">
-    <br>
-    <label class="form-label" for="password">Password:</label>
-    <input class="form-control" type="password" id="password" name="password">
-    <br>
-    <br>
+    <br />
+    <br />
     <a href="">Forgot Password?</a>
-    <br><br>
-    <input class="form-control" type="submit" value="Login">
-    <input class="form-control" type="submit" value="SignUp">
-  </form> 
-  
-{% endblock %} 
+    <br /><br />
+    <input class="form-control" type="submit" value="Login" />
+    <br />
+    <input class="form-control" type="submit" value="SignUp" />
+  </form>
+</div>
+{% endblock %}
