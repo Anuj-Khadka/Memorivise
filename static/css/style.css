@@ -12,6 +12,14 @@ body{
   background-color: #f1f1f1;
 }
 
+#login-form{
+  border: solid 1px #2d2d2d;
+  border-radius: 15px;
+}
+
+a{
+  text-decoration: none;
+}
 
 /*
 form {

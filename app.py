@@ -69,7 +69,8 @@ def update(id):
 
 @app.route("/login")
 def login():
-    return render_template('login.html')
+    # return render_template('login.html')
+    return 'hello world'
 
 
 if __name__ == "__main__":
