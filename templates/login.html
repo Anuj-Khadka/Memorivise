@@ -2,10 +2,10 @@
 <title>Login - Memorivise</title>
 {% endblock %} {% block body %}
 <div class="container">
-  <h1>Welcome to Memorivise</h1>
+  <h1 class="text-center">Welcome to Memorivise</h1>
 
-  <form class="mt-5 col-lg-6 mx-auto" action="/login" method="post">
-    <div class="mb-3">
+  <form class="my-3 col-lg-6 mx-auto bg-primary px-4" action="/login" method="post">
+    <div class="">
       <label for="email" class="form-label">Email</label>
       <input
         type="email"
@@ -29,12 +29,16 @@
       />
     </div>
 
-    <br />
-    <br />
-    <a href="">Forgot Password?</a>
-    <br /><br />
+    <div class="forgot-password col-12 ms-auto">
+      <a href="">Forgot Password?</a>
+    </div>
     <input class="form-control" type="submit" value="Login" />
-    <br />
+
+    <div class="seperator text-center my-3">
+      <span class="bg-secondary"></span>
+      OR
+      <span class="bg-secondary"></span>
+    </div>
     <input class="form-control" type="submit" value="SignUp" />
   </form>
 </div>
