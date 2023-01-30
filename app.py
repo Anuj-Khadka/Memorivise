@@ -6,7 +6,7 @@ app = Flask(__name__)
 app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///test.db"
 db = SQLAlchemy(app)
 
-class revise(db.Model):
+class reviseDb(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String(200), nullable=False)
     description = db.Column(db.String(500), nullable=False)
@@ -16,41 +16,46 @@ class revise(db.Model):
         return f'{self.id} - {self.text}'
 
 
-@app.route("/", methods=['POST', 'GET'])
+@app.route("/")
 def index():
+    return render_template("index.html")
+
+
+@app.route("/revise", methods=['POST', 'GET'])
+def revise():
     if request.method == 'POST':
         revise_title = request.form['title']
         revise_description = request.form['description']
-        new_revise = revise(title=revise_title, description=revise_description)
+        new_revise = reviseDb(title=revise_title, description=revise_description)
 
         try:
             db.session.add(new_revise)
             db.session.commit()
-            return redirect('/')
+            return redirect('/revise')
         except:
             return "there was some problem adding the content."
 
     else:
-        revisions = revise.query.order_by(revise.date).all()
-        return render_template('index.html', revisions=revisions)
+        revisions = reviseDb.query.order_by(reviseDb.date).all()
+        return render_template('revise.html', revisions=revisions)
 
 
-@app.route("/delete/<int:id>")
+@app.route("/revise/delete/<int:id>")
 def delete(id):
-    card_to_delete = revise.query.get(id)
+    card_to_delete = reviseDb.query.get(id)
 
     try:
         db.session.delete(card_to_delete)
         db.session.commit()
-        return redirect("/")
+        return redirect("/revise")
 
     except:
         return "there was a problem deleting the card."
 
 
-@app.route("/update/<int:id>", methods=['POST', 'GET'])
+@app.route("/revise/update/<int:id>", methods=['POST', 'GET'])
 def update(id):
-    update = revise.query.get_or_404(id)
+    update = reviseDb.query.get_or_404(id)
 
     if request.method == 'POST':
         update.title = request.form['title']
@@ -58,7 +63,7 @@ def update(id):
 
         try:
             db.session.commit()
-            return redirect('/')
+            return redirect('/revise')
 
         except:
             return "Sorry! there was a problem updating the card"
@@ -71,6 +76,13 @@ def update(id):
 def login():
     # return render_template('login.html')
     return 'hello world'
+
+
+@app.route("/contact")
+def contact():
+    return "this is a contact page haha"
+
+
 
 
 if __name__ == "__main__":

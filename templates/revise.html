@@ -3,7 +3,7 @@
 {% endblock %} {% block body %}
 
 <div class="container">
-  <form class="mt-5" method="POST" action="/">
+  <form class="mt-5" method="POST" action="/revise">
     <div class="mb-3">
       <label for="title" class="form-label">Title</label>
       <input
@@ -11,7 +11,8 @@
         class="form-control"
         name="title"
         id="title"
-        aria-describedby="emailHelp"
+        aria-describedby=""
+        autocomplete="off"
       />
     </div>
     <div class="mb-3">
@@ -33,12 +34,12 @@
         <div class="card me-2 mb-4 col-lg-4">
           <div class="card-body">
             <h5 class="card-title">{{ revision.title }}</h5>
-            <p class="card-text card-desc">
+            <p class="card-text card-desc" style="filter:blur(3px);">
                 {{ revision.description }}
             </p>
             <a href="#" class="card-link">Revise</a>
-            <a href="/update/{{revision.id}}" class="card-link">Update</a>
-            <a href="/delete/{{revision.id}}" class="card-link">Delete</a>
+            <a href="revise/update/{{revision.id}}" class="card-link">Update</a>
+            <a href="revise/delete/{{revision.id}}" class="card-link">Delete</a>
           </div>
         </div>
         {% endfor %}
