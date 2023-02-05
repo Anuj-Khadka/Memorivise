@@ -1,8 +1,11 @@
 from flask import Flask, render_template, request, redirect
 from flask_sqlalchemy import SQLAlchemy
+from auth import auth
 from datetime import datetime
 
 app = Flask(__name__)
+app.register_blueprint(auth, url_prefix="/")
+
 app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///test.db"
 db = SQLAlchemy(app)
 
@@ -19,7 +22,6 @@ class reviseDb(db.Model):
 @app.route("/")
 def index():
     return render_template("index.html")
-
 
 @app.route("/revise", methods=['POST', 'GET'])
 def revise():
@@ -70,12 +72,6 @@ def update(id):
 
     else:
         return render_template("update.html", update=update)
-
-
-@app.route("/login")
-def login():
-    # return render_template('login.html')
-    return 'hello world'
 
 
 @app.route("/contact")
