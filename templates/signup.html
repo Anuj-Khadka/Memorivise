@@ -1,17 +1,17 @@
 {% extends 'base.html' %} {% block title %}
-<title>Login - Memorivise</title>
+<title>SignUp - Memorivise</title>
 {% endblock %} {% block body %}
 <div class="container">
   <form
-    class="my-3 col-lg-5 mx-auto py-4 px-4"
-    action="/login"
-    method="post"
+    class="my-3 col-lg-5 mx-auto py-3 px-4"
+    action="/signup"
+    method="POST"
     id="login-form"
   >
     <h4 class="text-center">Welcome to Memorivise</h4>
     <hr />
     <div class="mb-3">
-      <label for="email" class="form-label">Email</label>
+      <label for="email" class="form-label mb-1">Email</label>
       <input
         type="email"
         class="form-control"
@@ -21,24 +21,38 @@
         placeholder="example@gmail.com"
         aria-describedby="emailHelp"
       />
-      <!-- <div id="emailHelp" class="form-text">
-        We'll never share your email with anyone else.
-      </div> -->
     </div>
     <div class="mb-3">
-      <label for="password" class="form-label">Password</label>
+      <label for="username" class="form-label mb-1">Username</label>
+      <input
+        type="username"
+        class="form-control"
+        name="username"
+        id="username"
+        autocomplete="off"
+        aria-describedby="usernameHelp"
+      />
+    </div>
+    <div class="mb-3">
+      <label for="password" class="form-label  mb-1">Password</label>
       <input
         type="password"
         class="form-control"
         name="password"
         id="password"
       />
-      <div class="forgot-password width-auto text-end col-12 ms-auto">
-        <a class="fs-6 fw-thin" href="">Forgot Password?</a>
-      </div>
+    </div>
+    <div class="mb-3">
+      <label for="confirm-password" class="form-label  mb-1">Confirm Password</label>
+      <input
+        type="password"
+        class="form-control"
+        name="confirm-password"
+        id="confirm-password"
+      />
     </div>
 
-    <input class="form-control btn-outline-success" type="submit" value="Login" />
+    <input class="form-control bg-secondary text-light btn-outline-success" type="submit" value="Sign Up" />
 
     <div class="seperator fs-6 text-muted text-center my-3">
       <span class="bg-secondary"></span>
@@ -49,7 +63,7 @@
     <div class="social-signup">
       <input class="form-control mb-2" type="button" value="Google" />
       <input class="form-control mb-2" type="button" value="Facebook" />
-      <input class="form-control mb-2" type="submit" value="SignUp" />
+      <div class="text-center mt-4 mb-0"><span>Already have an account? </span><a class="" href="/login">Log In</a></div>
     </div>
   </form>
 </div>
