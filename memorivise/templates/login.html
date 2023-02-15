@@ -1,0 +1,56 @@
+{% extends 'base.html' %} {% block title %}
+<title>Login - Memorivise</title>
+{% endblock %} {% block body %}
+<div class="container">
+  <form
+    class="my-3 col-lg-5 mx-auto py-4 px-4"
+    action="/login"
+    method="POST"
+    id="login-form"
+  >
+    <h4 class="text-center">Welcome Back!</h4>
+    <hr />
+    <div class="mb-3">
+      <label for="email" class="form-label">Email</label>
+      <input
+        type="email"
+        class="form-control"
+        name="email"
+        id="email"
+        autocomplete="off"
+        placeholder="example@gmail.com"
+        aria-describedby="emailHelp"
+      />
+      <!-- <div id="emailHelp" class="form-text">
+        We'll never share your email with anyone else.
+      </div> -->
+    </div>
+    <div class="mb-3">
+      <label for="password" class="form-label">Password</label>
+      <input
+        type="password"
+        class="form-control"
+        name="password"
+        id="password"
+      />
+      <div class="forgot-password width-auto text-end col-12 ms-auto">
+        <a class="fs-6 fw-thin" href="">Forgot Password?</a>
+      </div>
+    </div>
+
+    <input class="form-control bg-secondary text-light btn-outline-success" type="submit" value="Login" />
+
+    <div class="seperator fs-6 text-muted text-center my-3">
+      <span class="bg-secondary"></span>
+      Or Continue with
+      <span class="bg-secondary"></span>
+    </div>
+
+    <div class="social-signup">
+      <a class="form-control mb-2 text-center" type="button" href="">Google</a>
+      <a class="form-control mb-2 text-center" type="button" href="">Facebook</a>
+      <div class="text-center mt-4 mb-0"><span>New to Memorivise? </span><a class="" href="/signup">Sign Up</a></div>
+    </div>
+  </form>
+</div>
+{% endblock %}
