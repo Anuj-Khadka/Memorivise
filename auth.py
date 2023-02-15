@@ -10,13 +10,16 @@ def login():
 
 @auth.route("/signup", methods=['POST', 'GET'])
 def signup():
-    if request.method == 'POST':
-        email = request.form['email']
-        username = request.form['username']
-        password = request.form['password']
-        confirmPassword = request.form['confirm-password']
+    # if request.method == 'POST':
+    #     email = request.form['email']
+    #     username = request.form['username']
+    #     password = request.form['password']
+    #     confirmPassword = request.form['confirm-password']
 
-    # return render_template('signup.html')
+    #     if len(password) < 8:
+    #         flash("password is short", category="error")
+
+    return render_template('signup.html')
 
 
 @auth.route("/logout")

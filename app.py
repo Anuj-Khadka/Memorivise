@@ -2,21 +2,23 @@ from flask import Flask, render_template, request, redirect
 from flask_sqlalchemy import SQLAlchemy
 from auth import auth
 from datetime import datetime
+from .models import Revise, User
 
 app = Flask(__name__)
 app.register_blueprint(auth, url_prefix="/")
 
+db = SQLAlchemy()
 app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///test.db"
-db = SQLAlchemy(app)
+db.init_app(app)
 
-class reviseDb(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    title = db.Column(db.String(200), nullable=False)
-    description = db.Column(db.String(500), nullable=False)
-    date = db.Column(db.DateTime, default=datetime.utcnow)
+# class Revise(db.Model):
+#     id = db.Column(db.Integer, primary_key=True)
+#     title = db.Column(db.String(200), nullable=False)
+#     description = db.Column(db.String(500), nullable=False)
+#     date = db.Column(db.DateTime, default=datetime.utcnow)
 
-    def __repr__(self) -> str:
-        return f'{self.id} - {self.text}'
+#     def __repr__(self) -> str:
+#         return f'{self.id} - {self.text}'
 
 
 @app.route("/")
@@ -28,7 +30,7 @@ def revise():
     if request.method == 'POST':
         revise_title = request.form['title']
         revise_description = request.form['description']
-        new_revise = reviseDb(title=revise_title, description=revise_description)
+        new_revise = Revise(title=revise_title, description=revise_description)
 
         try:
             db.session.add(new_revise)
@@ -38,13 +40,13 @@ def revise():
             return "there was some problem adding the content."
 
     else:
-        revisions = reviseDb.query.order_by(reviseDb.date).all()
+        revisions = Revise.query.order_by(Revise.date).all()
         return render_template('revise.html', revisions=revisions)
 
 
 @app.route("/revise/delete/<int:id>")
 def delete(id):
-    card_to_delete = reviseDb.query.get(id)
+    card_to_delete = Revise.query.get(id)
 
     try:
         db.session.delete(card_to_delete)
@@ -57,7 +59,7 @@ def delete(id):
 
 @app.route("/revise/update/<int:id>", methods=['POST', 'GET'])
 def update(id):
-    update = reviseDb.query.get_or_404(id)
+    update = Revise.query.get_or_404(id)
 
     if request.method == 'POST':
         update.title = request.form['title']
