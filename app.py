@@ -1,4 +1,4 @@
-from memorivise import app
+from memorivise import app as app
 
 app = app()
 
