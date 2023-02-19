@@ -1,24 +1,25 @@
-from flask import Blueprint, Flask, render_template, request, flash, redirect
+from flask import Blueprint, Flask, render_template, request, flash, redirect, url_for
 from .models import User
 from werkzeug.security import generate_password_hash, check_password_hash
 from . import db
 
 auth = Blueprint("auth", __name__)
 
-@auth.route("/login")
-def login():
-    # if request.method == 'POST':
-    #     email = request.form['email']
-    #     password = request.form['password']
 
-    #     user = User.query.filter_by(email=email).first()
-    #     if user:
-    #         if check_password_hash(user.password, password):
-    #             return redirect('/')
-    #         else:
-    #             flash("incorect password", category="error")
-    #     else:
-    #         flash("")
+@auth.route("/login", methods=['POST', 'GET'])
+def login():
+    if request.method == "POST":
+        email = request.form['email']
+        password = request.form['password']
+
+        user = User.query.filter_by(email=email).first()
+        if user:
+            if check_password_hash(user.password, password):
+                return redirect("/")
+            else:
+                flash("incorrect password", category="error")
+        else:
+            flash("the user doesn't exist.")
     return render_template('login.html')
 
 
@@ -30,19 +31,27 @@ def signup():
         password = request.form['password']
         confirmPassword = request.form['confirm-password']
 
-        # if len(password) < 8:
-        #     flash("password is short", category="error")
+        user = User.query.filter_by(email=email).first()
 
-        new_user = User(email=email, username=username, password=generate_password_hash(password, method="sha256"))
-        try:
+        if user:
+            flash('Email already exists.', category='error')
+        elif len(email) < 4:
+            flash('Email must be greater than 3 characters.', category='error')
+        elif len(username) < 2:
+            flash('First name must be greater than 1 character.', category='error')
+        elif password != confirmPassword:
+            flash('Passwords don\'t match.', category='error')
+        elif len(password) < 7:
+            flash('Password must be at least 7 characters.', category='error')
+        else:
+            new_user = User(email=email, username=username, password=generate_password_hash(
+                password, method="sha256"))
             db.session.add(new_user)
             db.session.commit()
-            # flash('Account created!', category='success')
-            return redirect('/revise')
-        except:
-            return "there was a problem adding the user"
-    else:
-        return render_template('signup.html')
+            # flash('Account created!', "success")
+            return redirect(url_for('views.revise'))
+
+    return render_template('signup.html')
 
 
 @auth.route("/logout")
