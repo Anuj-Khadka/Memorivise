@@ -31,6 +31,7 @@
           <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          {% if user.is_authenticated %}
           <ul class="navbar-nav mx-auto mb-2 mb-lg-0">
             <li class="nav-item me-3">
               <a class="nav-link active" aria-current="page" href="/">Home</a>
@@ -57,8 +58,12 @@
             <li class="nav-item me-3">
               <a class="nav-link" href="/contact">Contact</a>
             </li>
+            <li class="nav-item me-3">
+              <a class="nav-link" href="/logout">Logout</a>
+            </li>
           </ul>
           <div class="search-icon" id="search-icon">
+            
             <svg
               xmlns="http://www.w3.org/2000/svg"
               x="0px"
@@ -92,6 +97,22 @@
               Search
             </button>
           </form>
+          <div id="user_name" class="ms-3">
+            <button class="btn btn-secondary">Hi {{ user.username }}</button>
+          </div>
+          {% else %}
+          <ul class="navbar-nav mx-auto mb-2 mb-lg-0">
+            <li class="nav-item me-3">
+              <a class="nav-link active" aria-current="page" href="/">Home</a>
+            </li>
+            <li class="nav-item me-3">
+              <a class="nav-link" aria-current="page" href="/signup">Sign up</a>
+            </li>
+            <li class="nav-item me-3">
+              <a class="nav-link" href="/contact">Contact</a>
+            </li>
+          </ul>
+          {% endif %}
         </div>
       </div>
     </nav>
