@@ -1,15 +1,17 @@
 from flask import Flask, Blueprint, render_template, request, redirect
 from .models import Revise
 from . import db
+from flask_login import current_user, login_required
 
 views = Blueprint("views", __name__)
 
 
 @views.route("/")
 def index():
-    return render_template("index.html")
+    return render_template("index.html", user=current_user)
 
 @views.route("/revise", methods=['POST', 'GET'])
+@login_required 
 def revise():
     if request.method == 'POST':
         revise_title = request.form['title']
