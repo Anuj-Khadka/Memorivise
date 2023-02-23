@@ -27,7 +27,7 @@ def revise():
 
     else:
         revisions = Revise.query.order_by(Revise.date).all()
-        return render_template('revise.html', revisions=revisions)
+        return render_template('revise.html', revisions=revisions, user=current_user)
 
 
 @views.route("/revise/delete/<int:id>")
@@ -59,9 +59,9 @@ def update(id):
             return "Sorry! there was a problem updating the card"
 
     else:
-        return render_template("update.html", update=update)
+        return render_template("update.html", update=update, user=current_user)
 
 
 @views.route("/contact")
 def contact():
-    return "this is a contact page haha"
+    return render_template("contact.html", user=current_user)
