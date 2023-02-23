@@ -1,0 +1,64 @@
+{% extends 'base.html' %} {% block title %}
+<title>Contact Us | Memorivise</title>
+{% endblock title%} {% block body %}
+<div class="container">
+  <div class="author-contact my-3 text-center">
+    <h1 class="muted">Contact Us</h1>
+    <div class="authors muted">
+      <a href="http://linkedin.com/in/" class="muted">
+        <span>
+            <i class="bi bi-linkedin"></i>
+        </span> Raushan Pandit
+    </a>
+      <a href="http://linkedin.com/in/anuj-khadka">Anuj Khadka</a>
+    </div>
+  </div>
+  <div class="contact row mt-5">
+    <div class="col-lg-6 d-none d-lg-block text-center mb-5">
+      <img
+        src="{{url_for( 'static', filename='../static/img/contact_envelop.svg')}}"
+        alt=""
+        class="img-fluid"
+        style="max-width: 60%"
+      />
+    </div>
+    <div class="contact-form col-lg-6 mb-5">
+      <form>
+        <div class="mb-3">
+          <!-- <label for="contactEmail" class="form-label">Email address</label> -->
+          <input
+            type="email"
+            class="form-control"
+            id="contactEmail"
+            name="contact_email"
+            placeholder="Enter your email"
+          />
+        </div>
+        <div class="mb-3">
+          <!-- <label for="contactName" class="form-label">Full Name:</label> -->
+          <input
+            type="email"
+            class="form-control"
+            id="contactName"
+            name="contact_name"
+            placeholder="Enter your full name"
+          />
+        </div>
+        <div class="mb-3">
+          <!-- <label for="contactMessage" class="form-label">Example textarea</label> -->
+          
+          <textarea
+            class="form-control"
+            id="contactMessage"
+            name="contact_message"
+            placeholder="Enter your message"
+            rows="3"
+          ></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+      </form>
+    </div>
+    <div class="col-lg-12"></div>
+  </div>
+</div>
+{% endblock body%}
