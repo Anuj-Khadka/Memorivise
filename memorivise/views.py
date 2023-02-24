@@ -1,5 +1,5 @@
-from flask import Flask, Blueprint, render_template, request, redirect
-from .models import Revise
+from flask import Flask, Blueprint, render_template, request, redirect, flash
+from .models import Revise, Contact
 from . import db
 from flask_login import current_user, login_required
 
@@ -10,8 +10,9 @@ views = Blueprint("views", __name__)
 def index():
     return render_template("index.html", user=current_user)
 
+
 @views.route("/revise", methods=['POST', 'GET'])
-@login_required 
+@login_required
 def revise():
     if request.method == 'POST':
         revise_title = request.form['title']
@@ -62,6 +63,20 @@ def update(id):
         return render_template("update.html", update=update, user=current_user)
 
 
-@views.route("/contact")
+@views.route("/contact", methods=["POST", "GET"])
 def contact():
+    if request.method == "POST":
+        contactEmail = request.form["contact-email"]
+        contactUser = request.form["contact-name"]
+        contactMessage = request.form["contact-message"]
+
+        new_message = Contact(contact_email=contactEmail,
+                              contact_name=contactUser, contact_message=contactMessage)
+        try:
+            db.session.add(new_message)
+            db.session.commit()
+            flash("Thank you for your message. We recieved it!", category="success")
+            return redirect("/contact")
+        except:
+            return "there was an error sending the message."
     return render_template("contact.html", user=current_user)
