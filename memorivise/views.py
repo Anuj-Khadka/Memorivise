@@ -1,5 +1,7 @@
-from flask import Flask, Blueprint, render_template, request, redirect
+from flask import Flask, Blueprint, render_template, request, redirect, jsonify
 from .models import Revise
+from .speech import transcribe
+from .models import Memorivise
 from . import db
 from flask_login import current_user, login_required
 
@@ -65,3 +67,33 @@ def update(id):
 @views.route("/contact")
 def contact():
     return render_template("contact.html", user=current_user)
+
+@views.route("/resources",)
+def resources():
+    return render_template("resources.html")
+
+@views.route('/Memorivise', methods=['POST', 'GET'])
+def Memorivise():
+    if Memorivise.method == 'POST':
+        memorivise_document = request.form['document']
+        new_revise = Revise( memorivise=memorivise_document)
+
+        try:
+            db.session.add(new_revise)
+            db.session.commit()
+            return redirect('/Memorivise')
+        except:
+            return "there was some problem adding the content."
+
+    else:
+        revisions = Revise.query.order_by(Memorivise.date).all()
+        return render_template('memorivise.html', revisions=revisions)
+
+@views.route('/Books')
+def Books():
+    return render_template('books.html')
+
+@views.route('/transcribe')
+def transcribe_speech():
+    text = transcribe()
+    return jsonify({'text': text})
