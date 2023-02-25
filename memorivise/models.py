@@ -20,6 +20,14 @@ class User(db.Model, UserMixin):
     username = db.Column(db.String(200), unique=True)
     password = db.Column(db.String(200))
     revise = db.relationship('Revise')
+    
+class Memorivise(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    document = db.Column(db.string, nullable=False)
+    date = db.Column(db.DateTime, default=datetime.utcnow)
+
+    def __repr__(self) -> str:
+        return f'{self.sno} - {self.document}'
 
 <<<<<<< HEAD
 class Contact(db.Model):
