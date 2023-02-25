@@ -21,6 +21,7 @@ class User(db.Model, UserMixin):
     password = db.Column(db.String(200))
     revise = db.relationship('Revise')
 
+<<<<<<< HEAD
 class Contact(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     contact_email = db.Column(db.String, nullable=False)
@@ -28,3 +29,13 @@ class Contact(db.Model):
     contact_message = db.Column(db.String, nullable=False)
     date = db.Column(db.DateTime, default=datetime.utcnow)
 
+=======
+
+class Memorivise(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    document = db.Column(db.string, nullable=False)
+    date = db.Column(db.DateTime, default=datetime.utcnow)
+
+    def __repr__(self) -> str:
+        return f'{self.sno} - {self.document}'
+>>>>>>> a7bafb3800bb03578241e37458f62de16792bef9
