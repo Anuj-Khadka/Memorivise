@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Memorivise</title>
+    <link rel="stylesheet" href="..\static\css\styles.css">
+</head>
+<body>
+        <h1><b>Memorivise</b></h1>
+        <div class="right">
+      <textarea id="transcribed-text" rows="10" cols="50"></textarea>
+    </div>
+    <div class="container">
+    <form class="mt-5" method="POST" action="/memorivise">
+      <button id="transcribe-btn">Start Recording</button>
+      <button id="stop-btn" type="submit"> Submit Problem </button>
+    </form>
+
+        <div class="revive-card-container my-5 container">
+          <h3>Memorivised Documents</h3>
+          <div class="revise-cards mt-3">
+            <div class="row card-row d-flex">
+      
+              {% if revisions|length < 1 %}
+              <h6 class="lead"> there are no saved documents available.</h6>
+              {% else%}
+              {% for revision in revisions %}
+              <div class="card me-2 mb-4 col-lg-4">
+                <div class="card-body">
+                  <h5 class="card-title">{{ Memorivise.title }}</h5>
+                  <p class="card-text card-desc" style="filter:blur(3px);">
+                      {{ Memorivise.description }}
+                  </p>
+                  <a href="#" class="card-link">Revise</a>
+                  <a href="revise/update/{{revision.id}}" class="card-link">Update</a>
+                  <a href="revise/delete/{{revision.id}}" class="card-link">Delete</a>
+                </div>
+              </div>
+            </div>
+              {% endfor %}
+              {% endif %}
+</body>
+<script>
+  const transcribeBtn = document.getElementById('transcribe-btn');
+  const transcribedText = document.getElementById('transcribed-text');
+
+  transcribeBtn.addEventListener('click', () => {
+      fetch('/transcribe')
+          .then(response => response.text())
+          .then(text => {
+              transcribedText.value = text;
+          });
+  });
+</script>
+</html>
