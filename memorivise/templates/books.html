@@ -1,19 +1,16 @@
-<!DOCTYPE html>
-<html lang="en">
+{% extends 'base.html' %}
 
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+{% block title%}
     <title>Books</title>
-</head>
+{% endblock title%}
 
-<body>
+
+{% block body %}
     <header>
-        <h1>Memorivise books </h1>
+        <h1 class="text-center">Memorivise books </h1>
     </header>
     <hr>
-    <h2> School Books</h2>
+    <h2 class="text-center"> School Books</h2>
     <div class="books-slider">
         <div class="icon-container">
             <div class="wraper">
@@ -32,35 +29,36 @@
             <figure>
                 <a href="..\static\book\University Physics with Modern Physics (14th edition) [Dr.Soc].pdf"><img
                         src="..\static\img\books\docccc.jpg" ></a>
-                <figcaption><b>Physics Olympiad</b></figcaption>
+                <figcaption class="my-2"><b>Physics Olympiad</b></figcaption>
             </figure>
             <figure>
                 <a href="..\static\book\University Physics with Modern Physics (14th edition) [Dr.Soc].pdf"><img
                         src="..\static\img\books\docccc.jpg" ></a>
-                <figcaption><b>Chemistrty Olympiad</b></figcaption>
+                <figcaption class="my-2"><b>Chemistrty Olympiad</b></figcaption>
             </figure>
             <figure>
                 <a href="..\static\book\University Physics with Modern Physics (14th edition) [Dr.Soc].pdf"><img
                         src="..\static\img\books\docccc.jpg" ></a>
-                <figcaption><b>Biology Olympiad</b></figcaption>
+                <figcaption class="my-2"><b>Biology Olympiad</b></figcaption>
             </figure>
             <figure>
                 <a href="..\static\book\University Physics with Modern Physics (14th edition) [Dr.Soc].pdf"><img
                         src="..\static\img\books\docccc.jpg" ></a>
-                <figcaption><b>Robotics Olympiad</b></figcaption>
+                <figcaption class="my-2"><b>Robotics Olympiad</b></figcaption>
             </figure>
             <figure>
                 <a href="..\static\book\University Physics with Modern Physics (14th edition) [Dr.Soc].pdf"><img
                         src="..\static\img\books\docccc.jpg" ></a>
-                <figcaption><b>Economics Olympiad</b></figcaption>
+                <figcaption class="my-2"><b>Economics Olympiad</b></figcaption>
             </figure>
         </div>
     </div>
     <img src="..\static\img\books\stand.png" class="stand" width="100%">
-</body>
+
 <style>
-    h1 {
-        text-align: center;
+     * {
+        background: url(..\static\img\books\banner-bg.jpg) no-repeat;
+        background-position: center;
     }
 
     header {
@@ -69,19 +67,12 @@
         padding: 0;
     }
 
-    * {
-        background: url(..\static\img\books\banner-bg.jpg)no-repeat;
-        background-position: center;
-    }
-
-    h2 {
+       h2 {
         text-align: center;
     }
 
     .icon-container figcaption {
         font-size: 15px;
-        margin-top: 15px;
-        margin-bottom: 15px;
     }
 
     .icon-container {
@@ -109,4 +100,4 @@
     }
 </style>
 
-</html>
+{% endblock body %}
