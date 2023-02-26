@@ -1,12 +1,6 @@
-<<<<<<< HEAD
-from flask import Flask, Blueprint, render_template, request, redirect, flash
-from .models import Revise, Contact
-=======
-from flask import Flask, Blueprint, render_template, request, redirect, jsonify
-from .models import Revise
-from .speech import transcribe
-from .models import Memorivise
->>>>>>> a7bafb3800bb03578241e37458f62de16792bef9
+from flask import Flask, Blueprint, render_template, request, redirect, flash, jsonify
+from .models import Revise, Contact, Memorivise
+# from .speech import transcribe
 from . import db
 from flask_login import current_user, login_required
 
@@ -72,7 +66,6 @@ def update(id):
 
 @views.route("/contact", methods=["POST", "GET"])
 def contact():
-<<<<<<< HEAD
     if request.method == "POST":
         contactEmail = request.form["contact-email"]
         contactUser = request.form["contact-name"]
@@ -88,36 +81,34 @@ def contact():
         except:
             return "there was an error sending the message."
     return render_template("contact.html", user=current_user)
-=======
-    return render_template("contact.html", user=current_user)
 
 @views.route("/resources",)
 def resources():
     return render_template("resources.html")
 
-@views.route('/Memorivise', methods=['POST', 'GET'])
+@views.route('/memorivise', methods=['POST', 'GET'])
 def Memorivise():
-    if Memorivise.method == 'POST':
+    if request.method == 'POST':
         memorivise_document = request.form['document']
-        new_revise = Revise( memorivise=memorivise_document)
+        new_memorevise = Memorivise( document=memorivise_document)
 
         try:
-            db.session.add(new_revise)
+            db.session.add(new_memorevise)
             db.session.commit()
-            return redirect('/Memorivise')
+            return redirect('/memorivise')
         except:
             return "there was some problem adding the content."
 
     else:
-        revisions = Revise.query.order_by(Memorivise.date).all()
+        revisions = Memorivise.query.order_by(Memorivise.date).all()
         return render_template('memorivise.html', revisions=revisions)
 
-@views.route('/Books')
+@views.route('/books')
 def Books():
-    return render_template('books.html')
+    return render_template('books.html', user=current_user)
 
 @views.route('/transcribe')
 def transcribe_speech():
-    text = transcribe()
-    return jsonify({'text': text})
->>>>>>> a7bafb3800bb03578241e37458f62de16792bef9
+    # text = transcribe()
+    # return jsonify({'text': text})
+    return "this is a transcribe page"
