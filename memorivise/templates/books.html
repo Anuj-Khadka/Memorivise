@@ -18,7 +18,17 @@
             <a href="#"><img src="..\static\img\books\class9.png"></a>
             <a href="#"><img src="..\static\img\books\class10.png"></a>
             <a href="#"><img src="..\static\img\books\classs11.png"></a>
-            <a href="#"><img src="..\static\img\books\class12.png" ></a>
+            <a href="#"><img src="..\static\img\books\class12.png" data-bs-toggle="collapse" data-bs-target="#collapseWidthExample" aria-expanded="false" aria-controls="collapseWidthExample">
+                <div style="min-height: 300px;">
+                    <div class="collapse collapse-horizontal" id="collapseWidthExample">
+                      <div class="card card-body" style="width: 800px;" id="sce">
+                        <a href="#"><img src="..\static\img\books\sciiii.png"></a>
+                        <a href="#"><img src="..\static\img\books\Education.png"></a>
+                        <a href="#"><img src="..\static\img\books\commerece.png"></a>
+                      </div>
+                    </div>
+                  </div>
+            </a>
             </div>
         </div>
     </div>
@@ -27,7 +37,7 @@
     <div class="books-slider">
         <div class="icon-container">
             <figure>
-                <a href="..\static\book\University Physics with Modern Physics (14th edition) [Dr.Soc].pdf"><img
+                <a href="/physics"><img
                         src="..\static\img\books\docccc.jpg" ></a>
                 <figcaption class="my-2"><b>Physics Olympiad</b></figcaption>
             </figure>
@@ -97,6 +107,14 @@
         width: 220px;
         margin-left: 8px;
         margin-right: 8px;
+    }
+    .card card-body img{
+        align-items: center;
+        height: 120px;
+        width: 100px;
+    }
+    #sce{
+        background: url(..\static\img\books\ghghf.jpg)no-repeat;
     }
 </style>
 
