@@ -1,21 +1,31 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Memorivise</title>
-    <link rel="stylesheet" href="..\static\css\styles.css">
-</head>
-<body>
-        <h1><b>Memorivise</b></h1>
-        <div class="right">
-      <textarea id="transcribed-text" rows="10" cols="50"></textarea>
+{% extends 'base.html' %}
+{% block title %}
+<title>Memorivise</title>
+{% endblock title %}
+{% block body %}
+<div class="container">
+<h1 class="mt-3">Memorivise</h1>
+
+<form class="mt-3" method="POST" action="/memorivise">
+  <div class="mb-3">
+    <label for="title" class="form-label">Title</label>
+    <input
+      type="text"
+      class="form-control"
+      name="title"
+      id="title"
+      aria-describedby=""
+      autocomplete="off"
+    />
+  </div>
+  <div class="mb-3">
+    <label for="decsription" class="form-label">Description</label>
+    <textarea class="form-control" id="transcribed-text" name="document" rows="10" cols="50"></textarea>
+  </div>
+      <div class="mt-3">
+      <a id="transcribe-btn" class="btn btn-secondary me-2">Start Recording</a>
+      <button id="stop-btn" class="btn btn-secondary" type="submit"> Submit Problem </button>
     </div>
-    <div class="container">
-    <form class="mt-5" method="POST" action="/memorivise">
-      <button id="transcribe-btn">Start Recording</button>
-      <button id="stop-btn" type="submit"> Submit Problem </button>
     </form>
 
         <div class="revive-card-container my-5 container">
@@ -29,9 +39,9 @@
               {% for revision in revisions %}
               <div class="card me-2 mb-4 col-lg-4">
                 <div class="card-body">
-                  <h5 class="card-title">{{ Memorivise.title }}</h5>
+                  <h5 class="card-title">{{ revision.title }}</h5>
                   <p class="card-text card-desc" style="filter:blur(3px);">
-                      {{ Memorivise.description }}
+                      {{ revision.document }}
                   </p>
                   <a href="#" class="card-link">Revise</a>
                   <a href="revise/update/{{revision.id}}" class="card-link">Update</a>
@@ -41,17 +51,19 @@
             </div>
               {% endfor %}
               {% endif %}
-</body>
-<script>
-  const transcribeBtn = document.getElementById('transcribe-btn');
-  const transcribedText = document.getElementById('transcribed-text');
-
-  transcribeBtn.addEventListener('click', () => {
-      fetch('/transcribe')
-          .then(response => response.text())
-          .then(text => {
-              transcribedText.value = text;
-          });
-  });
-</script>
-</html>
+            </div>
+              <script>
+                const transcribeBtn = document.getElementById('transcribe-btn');
+                const transcribedText = document.getElementById('transcribed-text');
+              
+                transcribeBtn.addEventListener('click', () => {
+                    fetch('/transcribe')
+                        .then(response => response.json())
+                        .then(text => {
+                            transcribedText.value = text.text;
+                            // console.log(text)
+                        });
+                });
+              </script>
+              </html>
+{% endblock body %}
