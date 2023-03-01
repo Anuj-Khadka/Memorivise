@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Biology Olympiad</title>
+</head>
+<body>
+    <div class="container">
+        <div class="row">
+            <header class="col-12">
+                <h1>IPhO Problems and Solutions</h1><br>
+            </header>
+            <div class="word-container">
+                <div class="word">
+                    <h3>2020<br>
+                        Japan
+                    </h3>
+                    <div class="content">
+                        <h3> Theory Exam-1 </h3>
+                        <a href="..\static\document\Biology\2020\IBO 2020_Theory Exam 1.pdf">Problems</a>
+                        <a href="..\static\document\Biology\2020\IBO 2020_Theory Exam 1 - Answer key.pdf">Solutions</a>
+                        <h3>Theory Exam-2</h3>
+                        <a href="..\static\document\Biology\2020\IBO 2020_Theory Exam 2.pdf">Problems</a>
+                        <a href="..\static\document\Biology\2020\IBO 2020_Theory Exam 2 - Answer key.pdf">Solutions</a>
+                        <h3> Practical Exam-1 (Animal Physiology) </h3>
+                        <a href="..\static\document\Biology\2020\IBO 2020_Practical 1 Exam (Animal Physiology).pdf">Problems</a>
+                        <a href="..\static\document\Biology\2020\IBO 2020_Practical 1 Exam (Animal Physiology) - Answer key.pdf">Solutions</a>
+                        <h3> Practical Exam-2( Bioinformatics) </h3>
+                        <a href="..\static\document\Biology\2020\IBO 2020_Practical 2 Exam (Bioinformatics).pdf">Problems</a>
+                        <a href="..\static\document\Biology\2020\IBO 2020_Practical 2 Exam (Bioinformatics) - Allocation point.pdf">Solutions</a>
+                    </div>
+                </div>
+
+                </div>
+        </div>
+    </div>
+</body>
+<style>
+    * {
+        margin: 0;
+        padding: 0;
+    }
+
+    h1 {
+        text-align: center;
+        margin-top: 20px;
+    }
+
+    header {
+        border: 1px solid black;
+        height: 100px;
+        margin-left: 10px;
+        margin-right: 10px;
+    }
+
+    .word-container {
+        display: flex;
+        flex-wrap: wrap;
+    }
+
+    .word {
+        width: 200px;
+        height: 200px;
+        margin: 10px;
+        background-color: #f0f0f0;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        text-align: center;
+        cursor: pointer;
+        transition: all 0.2s ease-in-out;
+        position: relative;
+    }
+
+    .word:hover {
+        background-color: #ddd;
+    }
+
+    .word .content {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        width: 100%;
+        height: auto;
+        padding: 10px;
+        background-color: #f0f0f0;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        display: none;
+        z-index: 1;
+    }
+
+    .word.active .content {
+        display: block;
+    }
+
+    .word.active {
+        z-index: 1;
+        width: 100%;
+        height: auto;
+    }
+
+    .content h3 {
+        display: flex;
+        flex-wrap: nowrap;
+        overflow-x: auto;
+        scrollbar-width: none;
+    }
+</style>
+<script>
+    const words = document.querySelectorAll('.word');
+
+    words.forEach((word) => {
+        word.addEventListener('click', () => {
+            // Toggle the active class on the clicked word element
+            word.classList.toggle('active');
+        });
+    });
+
+</script>
+</html>
