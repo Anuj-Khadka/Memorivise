@@ -21,8 +21,9 @@ class User(db.Model, UserMixin):
     password = db.Column(db.String(200))
     revise = db.relationship('Revise')
     
-class Memorivise(db.Model):
+class MemoriviseDB(db.Model):
     id = db.Column(db.Integer, primary_key=True)
+    title = db.Column(db.String(200), nullable=False)
     document = db.Column(db.String, nullable=False)
     date = db.Column(db.DateTime, default=datetime.utcnow)
 
