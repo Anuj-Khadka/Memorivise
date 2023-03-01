@@ -1,6 +1,6 @@
 from flask import Flask, Blueprint, render_template, request, redirect, flash, jsonify
-from .models import Revise, Contact, Memorivise
-# from .speech import transcribe
+from .models import Revise, Contact, MemoriviseDB
+from .speech import transcribe
 from . import db
 from flask_login import current_user, login_required
 
@@ -89,8 +89,9 @@ def resources():
 @views.route('/memorivise', methods=['POST', 'GET'])
 def Memorivise():
     if request.method == 'POST':
+        memorivise_title = request.form['title']
         memorivise_document = request.form['document']
-        new_memorevise = Memorivise( document=memorivise_document)
+        new_memorevise = MemoriviseDB( title=memorivise_title, document=memorivise_document)
 
         try:
             db.session.add(new_memorevise)
@@ -100,8 +101,8 @@ def Memorivise():
             return "there was some problem adding the content."
 
     else:
-        revisions = Memorivise.query.order_by(Memorivise.date).all()
-        return render_template('memorivise.html', revisions=revisions)
+        revisions = MemoriviseDB.query.order_by(MemoriviseDB.date).all()
+        return render_template('memorivise.html', revisions=revisions, user=current_user)
 
 @views.route('/books')
 def Books():
@@ -109,6 +110,5 @@ def Books():
 
 @views.route('/transcribe')
 def transcribe_speech():
-    # text = transcribe()
-    # return jsonify({'text': text})
-    return "this is a transcribe page"
+    text = transcribe()
+    return jsonify({'text': text})
