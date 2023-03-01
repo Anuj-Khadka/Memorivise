@@ -1,62 +1,82 @@
 {% extends 'base.html' %}
 
 {% block title%}
-    <title>Books</title>
+<title>Books</title>
 {% endblock title%}
 
 
 {% block body %}
-    <header>
-        <h1 class="text-center">Memorivise books </h1>
-    </header>
-    <hr>
-    <h2 class="text-center"> School Books</h2>
-    <div class="books-slider">
-        <div class="icon-container">
-            <div class="wraper">
+<header>
+    <h1 class="text-center">Memorivise books </h1>
+</header>
+<hr>
+<h2 class="text-center"> School Books</h2>
+<div class="books-slider">
+    <div class="icon-container">
+        <div class="wraper">
             <a href="#"><img src="..\static\img\books\class8.png"></a>
             <a href="#"><img src="..\static\img\books\class9.png"></a>
             <a href="#"><img src="..\static\img\books\class10.png"></a>
-            <a href="#"><img src="..\static\img\books\classs11.png"></a>
-            <a href="#"><img src="..\static\img\books\class12.png" ></a>
-            </div>
+            <a href="#"><img src="..\static\img\books\classs11.png" data-bs-toggle="collapse"
+                    data-bs-target="#collapseWidthExample" aria-expanded="false" aria-controls="collapseWidthExample">
+                <div style="min-height: 300px;">
+                    <div class="collapse collapse-horizontal" id="collapseWidthExample">
+                        <div class="card card-body" style="width: 800px;" id="sce">
+                            <a href="#"><img src="..\static\img\books\sciiii.png"></a>
+                            <a href="#"><img src="..\static\img\books\Education.png"></a>
+                            <a href="#"><img src="..\static\img\books\commerece.png"></a>
+                        </div>
+                    </div>
+                </div>
+            </a>
+            <a href="#"><img src="..\static\img\books\class12.png" data-bs-toggle="collapse"
+                    data-bs-target="#collapseWidthExample" aria-expanded="false" aria-controls="collapseWidthExample">
+                <div style="min-height: 300px;">
+                    <div class="collapse collapse-horizontal" id="collapseWidthExample">
+                        <div class="card card-body" style="width: 800px;" id="sce">
+                            <a href="#"><img src="..\static\img\books\sciiii.png"></a>
+                            <a href="#"><img src="..\static\img\books\Education.png"></a>
+                            <a href="#"><img src="..\static\img\books\commerece.png"></a>
+                        </div>
+                    </div>
+                </div>
+            </a>
         </div>
     </div>
-    <img src="..\static\img\books\stand.png" class="stand" width="100%">
-    <h2> Olympiad Questions</h2>
-    <div class="books-slider">
-        <div class="icon-container">
-            <figure>
-                <a href="..\static\book\University Physics with Modern Physics (14th edition) [Dr.Soc].pdf"><img
-                        src="..\static\img\books\docccc.jpg" ></a>
-                <figcaption class="my-2"><b>Physics Olympiad</b></figcaption>
-            </figure>
-            <figure>
-                <a href="..\static\book\University Physics with Modern Physics (14th edition) [Dr.Soc].pdf"><img
-                        src="..\static\img\books\docccc.jpg" ></a>
-                <figcaption class="my-2"><b>Chemistrty Olympiad</b></figcaption>
-            </figure>
-            <figure>
-                <a href="..\static\book\University Physics with Modern Physics (14th edition) [Dr.Soc].pdf"><img
-                        src="..\static\img\books\docccc.jpg" ></a>
-                <figcaption class="my-2"><b>Biology Olympiad</b></figcaption>
-            </figure>
-            <figure>
-                <a href="..\static\book\University Physics with Modern Physics (14th edition) [Dr.Soc].pdf"><img
-                        src="..\static\img\books\docccc.jpg" ></a>
-                <figcaption class="my-2"><b>Robotics Olympiad</b></figcaption>
-            </figure>
-            <figure>
-                <a href="..\static\book\University Physics with Modern Physics (14th edition) [Dr.Soc].pdf"><img
-                        src="..\static\img\books\docccc.jpg" ></a>
-                <figcaption class="my-2"><b>Economics Olympiad</b></figcaption>
-            </figure>
-        </div>
+</div>
+<img src="..\static\img\books\stand.png" class="stand" width="100%">
+<h2> Olympiad Questions</h2>
+<div class="books-slider">
+    <div class="icon-container">
+        <figure>
+            <a href="/physics"><img src="..\static\img\books\docccc.jpg"></a>
+            <figcaption class="my-2"><b>Physics Olympiad</b></figcaption>
+        </figure>
+        <figure>
+            <a href="/chemistry"><img
+                    src="..\static\img\books\docccc.jpg"></a>
+            <figcaption class="my-2"><b>Chemistrty Olympiad</b></figcaption>
+        </figure>
+        <figure>
+            <a href="/biology"><img src="..\static\img\books\docccc.jpg"></a>
+            <figcaption class="my-2"><b>Biology Olympiad</b></figcaption>
+        </figure>
+        <figure>
+            <a href="..\static\book\University Physics with Modern Physics (14th edition) [Dr.Soc].pdf"><img
+                    src="..\static\img\books\docccc.jpg"></a>
+            <figcaption class="my-2"><b>Robotics Olympiad</b></figcaption>
+        </figure>
+        <figure>
+            <a href="..\static\book\University Physics with Modern Physics (14th edition) [Dr.Soc].pdf"><img
+                    src="..\static\img\books\docccc.jpg"></a>
+            <figcaption class="my-2"><b>Economics Olympiad</b></figcaption>
+        </figure>
     </div>
-    <img src="..\static\img\books\stand.png" class="stand" width="100%">
+</div>
+<img src="..\static\img\books\stand.png" class="stand" width="100%">
 
 <style>
-     * {
+    * {
         background: url(..\static\img\books\banner-bg.jpg) no-repeat;
         background-position: center;
     }
@@ -67,7 +87,7 @@
         padding: 0;
     }
 
-       h2 {
+    h2 {
         text-align: center;
     }
 
@@ -85,18 +105,30 @@
         margin-left: 18px;
         text-align: center;
     }
-    .wraper img{
+
+    .wraper img {
         height: 250px;
         width: 200px;
         margin-right: 20px;
         margin-left: 20px;
         padding: 8px;
     }
-    figure img{
+
+    figure img {
         height: 250px;
         width: 220px;
         margin-left: 8px;
         margin-right: 8px;
+    }
+
+    .card card-body img {
+        align-items: center;
+        height: 120px;
+        width: 100px;
+    }
+
+    #sce {
+        background: url(..\static\img\books\ghghf.jpg)no-repeat;
     }
 </style>
 
