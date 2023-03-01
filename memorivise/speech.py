@@ -1,5 +1,5 @@
 import speech_recognition as sr
-
+from flask import flash
 
 def transcribe():
     # Create a Recognizer object
@@ -16,6 +16,7 @@ def transcribe():
     with sr.Microphone() as source:
         # Adjust for ambient noise
         r.adjust_for_ambient_noise(source)
+        flash("Speak something...", category="success")
         print("Speak something...")
         # Listen for audio and store it in a variable
         audio = r.listen(source, timeout=5.0)
