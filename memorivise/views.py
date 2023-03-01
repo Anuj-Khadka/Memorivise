@@ -108,6 +108,14 @@ def Memorivise():
 def Books():
     return render_template('books.html', user=current_user)
 
+@views.route('/physics')
+def Physics():
+    return render_template('physics.html', user=current_user)
+
+@views.route('/biology')
+def Biology():
+    return render_template('biology.html', user=current_user)
+
 @views.route('/transcribe')
 def transcribe_speech():
     text = transcribe()
