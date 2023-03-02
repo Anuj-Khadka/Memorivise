@@ -26,12 +26,3 @@ searchSubmit.addEventListener("click", () => {
   searchExpand.classList.toggle("d-none");
 });
 
-
-
-// books.html - modals
-let modalLink = document.getElementById("modal-link")
-let facultyModal = document.getElementById("faculty-modal")
-
-modalLink.addEventListener("click", (e)=>{
-  facultyModal.classList.addClass(show)
-})
