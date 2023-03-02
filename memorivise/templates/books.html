@@ -1,135 +1,114 @@
-{% extends 'base.html' %}
-
-{% block title%}
+{% extends 'base.html' %} {% block title%}
 <title>Books</title>
-{% endblock title%}
-
-
-{% block body %}
-<header>
-    <h1 class="text-center">Memorivise books </h1>
-</header>
-<hr>
-<h2 class="text-center"> School Books</h2>
-<div class="books-slider">
-    <div class="icon-container">
-        <div class="wraper">
-            <a href="#"><img src="..\static\img\books\class8.png"></a>
-            <a href="#"><img src="..\static\img\books\class9.png"></a>
-            <a href="#"><img src="..\static\img\books\class10.png"></a>
-            <a href="#"><img src="..\static\img\books\classs11.png" data-bs-toggle="collapse"
-                    data-bs-target="#collapseWidthExample" aria-expanded="false" aria-controls="collapseWidthExample">
-                <div style="min-height: 300px;">
-                    <div class="collapse collapse-horizontal" id="collapseWidthExample">
-                        <div class="card card-body" style="width: 800px;" id="sce">
-                            <a href="#"><img src="..\static\img\books\sciiii.png"></a>
-                            <a href="#"><img src="..\static\img\books\Education.png"></a>
-                            <a href="#"><img src="..\static\img\books\commerece.png"></a>
-                        </div>
-                    </div>
-                </div>
-            </a>
-            <a href="#"><img src="..\static\img\books\class12.png" data-bs-toggle="collapse"
-                    data-bs-target="#collapseWidthExample" aria-expanded="false" aria-controls="collapseWidthExample">
-                <div style="min-height: 300px;">
-                    <div class="collapse collapse-horizontal" id="collapseWidthExample">
-                        <div class="card card-body" style="width: 800px;" id="sce">
-                            <a href="#"><img src="..\static\img\books\sciiii.png"></a>
-                            <a href="#"><img src="..\static\img\books\Education.png"></a>
-                            <a href="#"><img src="..\static\img\books\commerece.png"></a>
-                        </div>
-                    </div>
-                </div>
-            </a>
+{% endblock title%} {% block body %}
+<div class="container">
+  <header>
+    <h1 class="text-center">Memorivise books</h1>
+  </header>
+  <hr />
+  <h2 class="text-center">School Books</h2>
+  <div class="container-fluid row mt-4 d-flex gap-3 justify-content-center">
+    <div class="col-lg-4  card" style="width: 22rem" id="classes">
+      <div class="card-body">
+        <h4 class="card-title">Class 8</h4>
+        <h6 class="card-subtitle mb-5 text-muted">10 Lessons | 8 Subjects</h6>
+        <a href="#" class="card-link">View more</a>
+      </div>
+    </div>
+    <div class="col-lg-4  card" style="width: 22rem" id="classes">
+      <div class="card-body">
+        <h4 class="card-title">Class 9</h4>
+        <h6 class="card-subtitle mb-5 text-muted">10 Lessons | 8 Subjects</h6>
+        <a href="#" class="card-link">View more</a>
+      </div>
+    </div>
+    <div class="col-lg-4  card" style="width: 22rem" id="classes">
+      <div class="card-body">
+        <h4 class="card-title">Class 10</h4>
+        <h6 class="card-subtitle mb-5 text-muted">10 Lessons | 8 Subjects</h6>
+        <a href="#" class="card-link">View more</a>
+      </div>
+    </div>
+    <div class="col-lg-4  card" style="width: 22rem" id="classes">
+      <div class="card-body">
+        <h4 class="card-title">Class 11</h4>
+        <h6 class="card-subtitle mb-5 text-muted">10 Lessons | 8 Subjects</h6>
+        <a href="#" class="card-link">View more</a>
+      </div>
+    </div>
+    <div class="col-lg-4  card" style="width: 22rem" id="classes">
+      <div class="card-body">
+        <h4 class="card-title">Class 12</h4>
+        <h6 class="card-subtitle mb-5 text-muted">10 Lessons | 8 Subjects</h6>
+        <a type="button" class="card-link" data-bs-toggle="modal" data-bs-target="#tweleModal">View more</a>
+      </div>
+    </div>
+  
+      <div class="modal fade " id="tweleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">Faculty</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body text-center">
+              <a href="" class="btn btn-secondary col-lg-5 mx-2 my-2 py-2">Science</a>
+              <a href="" class="btn btn-secondary col-lg-5 mx-2 my-2 py-2">Management</a>
+              <a href="" class="btn btn-secondary col-lg-5 mx-2 my-2 py-2">Education</a>
+              <a href="" class="btn btn-secondary col-lg-5 mx-2 my-2 py-2">Commerce</a>
+            </div>
+            <!-- <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+              <button type="button" class="btn btn-primary">Save Changes</button>
+            </div> -->
+          </div>
         </div>
-    </div>
-</div>
-<img src="..\static\img\books\stand.png" class="stand" width="100%">
-<h2> Olympiad Questions</h2>
-<div class="books-slider">
+      </div>
+  </div>
+  <!-- <img src="..\static\img\books\stand.png" class="stand" width="100%" /> -->
+  <!-- <h2>Olympiad Questions</h2> -->
+  <!-- <div class="books-slider">
     <div class="icon-container">
-        <figure>
-            <a href="/physics"><img src="..\static\img\books\docccc.jpg"></a>
-            <figcaption class="my-2"><b>Physics Olympiad</b></figcaption>
-        </figure>
-        <figure>
-            <a href="/chemistry"><img
-                    src="..\static\img\books\docccc.jpg"></a>
-            <figcaption class="my-2"><b>Chemistrty Olympiad</b></figcaption>
-        </figure>
-        <figure>
-            <a href="/biology"><img src="..\static\img\books\docccc.jpg"></a>
-            <figcaption class="my-2"><b>Biology Olympiad</b></figcaption>
-        </figure>
-        <figure>
-            <a href="..\static\book\University Physics with Modern Physics (14th edition) [Dr.Soc].pdf"><img
-                    src="..\static\img\books\docccc.jpg"></a>
-            <figcaption class="my-2"><b>Robotics Olympiad</b></figcaption>
-        </figure>
-        <figure>
-            <a href="..\static\book\University Physics with Modern Physics (14th edition) [Dr.Soc].pdf"><img
-                    src="..\static\img\books\docccc.jpg"></a>
-            <figcaption class="my-2"><b>Economics Olympiad</b></figcaption>
-        </figure>
+      <figure>
+        <a href="/physics"><img src="..\static\img\books\docccc.jpg" /></a>
+        <figcaption class="my-2"><b>Physics Olympiad</b></figcaption>
+      </figure>
+      <figure>
+        <a href="/chemistry"><img src="..\static\img\books\docccc.jpg" /></a>
+        <figcaption class="my-2"><b>Chemistrty Olympiad</b></figcaption>
+      </figure>
+      <figure>
+        <a href="/biology"><img src="..\static\img\books\docccc.jpg" /></a>
+        <figcaption class="my-2"><b>Biology Olympiad</b></figcaption>
+      </figure>
+      <figure>
+        <a
+          href="..\static\book\University Physics with Modern Physics (14th edition) [Dr.Soc].pdf"
+          ><img src="..\static\img\books\docccc.jpg"
+        /></a>
+        <figcaption class="my-2"><b>Robotics Olympiad</b></figcaption>
+      </figure>
+      <figure>
+        <a
+          href="..\static\book\University Physics with Modern Physics (14th edition) [Dr.Soc].pdf"
+          ><img src="..\static\img\books\docccc.jpg"
+        /></a>
+        <figcaption class="my-2"><b>Economics Olympiad</b></figcaption>
+      </figure>
     </div>
+  </div> -->
+  <!-- <img src="..\static\img\books\stand.png" class="stand" width="100%" /> -->
+
+  <style>
+    #classes {
+      transition: box-shadow 0.2s;
+    }
+
+    #classes:hover {
+      /* transform: translate(0, -0.5rem); */
+      box-shadow:2px 3px 7px 1px #2b2b2b34 ;
+    }
+  </style>
+
+  {% endblock body %}
 </div>
-<img src="..\static\img\books\stand.png" class="stand" width="100%">
-
-<style>
-    * {
-        background: url(..\static\img\books\banner-bg.jpg) no-repeat;
-        background-position: center;
-    }
-
-    header {
-        border: solid black;
-        margin: 0;
-        padding: 0;
-    }
-
-    h2 {
-        text-align: center;
-    }
-
-    .icon-container figcaption {
-        font-size: 15px;
-    }
-
-    .icon-container {
-        display: flex;
-    }
-
-    .icon-container figure {
-        margin-right: 18px;
-        margin-bottom: 15px;
-        margin-left: 18px;
-        text-align: center;
-    }
-
-    .wraper img {
-        height: 250px;
-        width: 200px;
-        margin-right: 20px;
-        margin-left: 20px;
-        padding: 8px;
-    }
-
-    figure img {
-        height: 250px;
-        width: 220px;
-        margin-left: 8px;
-        margin-right: 8px;
-    }
-
-    .card card-body img {
-        align-items: center;
-        height: 120px;
-        width: 100px;
-    }
-
-    #sce {
-        background: url(..\static\img\books\ghghf.jpg)no-repeat;
-    }
-</style>
-
-{% endblock body %}
