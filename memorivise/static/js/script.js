@@ -11,20 +11,27 @@
 //   }
 // });
 
-
 // search icon in navbar
-let searchIcon = document.getElementById("search-icon")
-let searchExpand = document.getElementById("search-expand")
-let searchSubmit = document.getElementById("search-submit")
+let searchIcon = document.getElementById("search-icon");
+let searchExpand = document.getElementById("search-expand");
+let searchSubmit = document.getElementById("search-submit");
 
-searchIcon.addEventListener("click", ()=>{
-  searchIcon.classList.add("d-none")
-  searchExpand.classList.remove("d-none")
-})
+searchIcon.addEventListener("click", () => {
+  searchIcon.classList.add("d-none");
+  searchExpand.classList.remove("d-none");
+});
+
+searchSubmit.addEventListener("click", () => {
+  searchIcon.classList.toggle("d-none");
+  searchExpand.classList.toggle("d-none");
+});
 
 
-searchSubmit.addEventListener("click", ()=>{
-  searchIcon.classList.toggle("d-none")
-  searchExpand.classList.toggle("d-none")
 
+// books.html - modals
+let modalLink = document.getElementById("modal-link")
+let facultyModal = document.getElementById("faculty-modal")
+
+modalLink.addEventListener("click", (e)=>{
+  facultyModal.classList.addClass(show)
 })
