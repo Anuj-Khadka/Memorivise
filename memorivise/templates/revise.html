@@ -17,7 +17,12 @@
     </div>
     <div class="mb-3">
       <label for="decsription" class="form-label">Description</label>
-      <textarea class="form-control" name="description" id="description" rows="3"></textarea>
+      <textarea
+        class="form-control"
+        name="description"
+        id="description"
+        rows="3"
+      ></textarea>
     </div>
     <button type="submit" id="submit" class="btn btn-primary">Submit</button>
   </form>
@@ -26,24 +31,84 @@
     <h3>Revise Cards</h3>
     <div class="revise-cards mt-3">
       <div class="row card-row d-flex">
-
         {% if revisions|length < 1 %}
-        <h6 class="lead"> there are no saved cards available.</h6>
-        {% else%}
-        {% for revision in revisions %}
+        <h6 class="lead">there are no saved cards available.</h6>
+        {% else%} {% for revision in revisions %}
         <div class="card me-2 mb-4 col-lg-4">
           <div class="card-body">
             <h5 class="card-title">{{ revision.title }}</h5>
-            <p class="card-text card-desc" style="filter:blur(3px);">
-                {{ revision.description }}
+            <p class="card-text card-desc" style="filter: blur(3px)">
+              {{ revision.description }}
             </p>
-            <a class="card-link" id="revise_test" data-toggle="modal" data-target="#testModalCenter">Revise</a>
+            <a
+              class="card-link"
+              id="revise_test"
+              data-bs-toggle="modal"
+              data-bs-target="#exampleModal"
+              data-toggle="modal"
+              data-target="#exampleModal"
+              style="cursor:pointer"
+              >Revise</a
+            >
+            <!-- <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+              Launch Modal
+            </button> -->
+
             <a href="revise/update/{{revision.id}}" class="card-link">Update</a>
             <a href="revise/delete/{{revision.id}}" class="card-link">Delete</a>
           </div>
+          <div
+            class="modal fade"
+            id="exampleModal"
+            tabindex="-1"
+            role="dialog"
+            aria-labelledby="exampleModalCenterTitle"
+            aria-hidden="true"
+          >
+            <div class="modal-dialog modal-dialog-centered" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="exampleModalCenterTitle">
+                    Revise Test
+                  </h5>
+                  <button
+                    type="button"
+                    class="btn-close"
+                    data-bs-dismiss="modal"
+                    aria-label="Close"
+                  ></button>
+                </div>
+                <div class="modal-body">
+                  <form>
+                    <div class="form-group">
+                      <label for="exampleFormControlTextarea1"
+                        >Enter the content to revise</label
+                      >
+                      <textarea
+                        class="form-control"
+                        id="exampleFormControlTextarea1"
+                        rows="3"
+                      ></textarea>
+                    </div>
+                  </form>
+                </div>
+                <div class="modal-footer">
+                  <!-- <button
+                    type="button"
+                    class="btn btn-secondary"
+                    data-dismiss="modal"
+                  >
+                    Close
+                  </button> -->
+                  <button type="button" class="btn btn-primary">
+                    Test
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
-        {% endfor %}
-        {% endif %}
+        {% endfor %} {% endif %}
       </div>
     </div>
   </div>
