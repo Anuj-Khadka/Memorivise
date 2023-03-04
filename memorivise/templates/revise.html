@@ -57,6 +57,7 @@
             <a href="revise/update/{{revision.id}}" class="card-link">Update</a>
             <a href="revise/delete/{{revision.id}}" class="card-link">Delete</a>
           </div>
+
           <div
             class="modal fade"
             id="exampleModal"
@@ -79,7 +80,7 @@
                   ></button>
                 </div>
                 <div class="modal-body">
-                  <form>
+                  <form method="POST" action="/revise/revise_test">
                     <div class="form-group">
                       <label for="exampleFormControlTextarea1"
                         >Enter the content to revise</label
@@ -88,9 +89,9 @@
                         class="form-control"
                         id="exampleFormControlTextarea1"
                         rows="3"
+                        name="revise_test"
                       ></textarea>
                     </div>
-                  </form>
                 </div>
                 <div class="modal-footer">
                   <!-- <button
@@ -100,10 +101,12 @@
                   >
                     Close
                   </button> -->
-                  <button type="button" class="btn btn-primary">
+                  <button type="submit" class="btn btn-primary" id="testReviseSubmit">
                     Test
                   </button>
                 </div>
+              </form>
+
               </div>
             </div>
           </div>
