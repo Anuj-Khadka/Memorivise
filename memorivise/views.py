@@ -108,6 +108,11 @@ def Memorivise():
 def Books():
     return render_template('books.html', user=current_user)
 
+@views.route('/science')
+def Science():
+    return render_template('science.html', user=current_user)
+
+
 @views.route('/physics')
 def Physics():
     return render_template('physics.html', user=current_user)

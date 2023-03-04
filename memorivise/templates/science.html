@@ -1,0 +1,34 @@
+{% extends 'base.html' %} {% block title%}
+<title>Science Books</title>
+{% endblock title%} {% block body %}
+<div class="container">
+  <header>
+    <h1 class="text-center">Memorivise books</h1>
+  </header>
+  <hr />
+  <h2 class="text-center">Science Books</h2>
+</div>
+<div class="content">
+    <div class="books-slider">
+      <div class="wraper">
+        <a href="..\static\book\University Physics with Modern Physics (14th edition) [Dr.Soc].pdf"><img src="..\static\img\books\university.jpg"></a>
+      </div>
+      <div class="container">
+      <img src="..\static\img\books\stand.png" class="stand">
+    </div>
+    </div>
+<style>
+  .wraper {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    margin: 20px 0;
+  }
+  
+  .wraper img {
+    width: 100px;
+    height: 120px;
+    margin-right: 20px;
+  }
+</style>
+  {% endblock body %}
