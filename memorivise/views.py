@@ -32,6 +32,26 @@ def revise():
         return render_template('revise.html', revisions=revisions, user=current_user)
 
 
+@views.route("/revise/revise_test", methods=["POST", "GET"])
+def revise_test():
+    if request.method == 'POST':
+        user_data = request.form['revise_test'].lower()
+        # this will check case sensetive 
+        # result = db.session.query(Revise).filter(
+        #     Revise.description == user_data).all()
+
+        # this is case insensetive check
+        result = db.session.query(Revise).filter(
+            Revise.description.ilike(user_data)).all()
+        if result:
+            flash("yes it is correct", category="success")
+            return redirect("/revise")
+        else:
+            flash("no try again", category="error")
+            return redirect("/revise")
+    return render_template('revise.html', user=current_user)
+
+
 @views.route("/revise/delete/<int:id>")
 def delete(id):
     card_to_delete = Revise.query.get(id)
@@ -82,16 +102,19 @@ def contact():
             return "there was an error sending the message."
     return render_template("contact.html", user=current_user)
 
+
 @views.route("/resources",)
 def resources():
     return render_template("resources.html")
+
 
 @views.route('/memorivise', methods=['POST', 'GET'])
 def Memorivise():
     if request.method == 'POST':
         memorivise_title = request.form['title']
         memorivise_document = request.form['document']
-        new_memorevise = MemoriviseDB( title=memorivise_title, document=memorivise_document)
+        new_memorevise = MemoriviseDB(
+            title=memorivise_title, document=memorivise_document)
 
         try:
             db.session.add(new_memorevise)
@@ -104,9 +127,11 @@ def Memorivise():
         revisions = MemoriviseDB.query.order_by(MemoriviseDB.date).all()
         return render_template('memorivise.html', revisions=revisions, user=current_user)
 
+
 @views.route('/books')
 def Books():
     return render_template('books.html', user=current_user)
+
 
 @views.route('/science')
 def Science():
@@ -117,9 +142,11 @@ def Science():
 def Physics():
     return render_template('physics.html', user=current_user)
 
+
 @views.route('/biology')
 def Biology():
     return render_template('biology.html', user=current_user)
+
 
 @views.route('/transcribe')
 def transcribe_speech():
