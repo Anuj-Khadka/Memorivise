@@ -147,6 +147,10 @@ def Physics():
 def Biology():
     return render_template('biology.html', user=current_user)
 
+@views.route('/chemistry')
+def Chemistry():
+    return render_template('chemistry.html', user=current_user)
+
 
 @views.route('/transcribe')
 def transcribe_speech():
