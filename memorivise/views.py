@@ -126,7 +126,57 @@ def Memorivise():
     else:
         revisions = MemoriviseDB.query.order_by(MemoriviseDB.date).all()
         return render_template('memorivise.html', revisions=revisions, user=current_user)
+    
+@views.route("/memorivise/memorivise_test", methods=["POST", "GET"])
+def memorivise_test():
+    if request.method == 'POST':
+        user_data = request.form['memorivise_test'].lower()
+        # this will check case sensetive 
+        # result = db.session.query(Revise).filter(
+        #     Revise.description == user_data).all()
 
+        # this is case insensetive check
+        result = db.session.query(Revise).filter(
+            Revise.description.ilike(user_data)).all()
+        if result:
+            flash("yes it is correct", category="success")
+            return redirect("/memorivise")
+        else:
+            flash("no try again", category="error")
+            return redirect("/memorivise")
+    return render_template('memorivise.html', user=current_user)
+    
+
+@views.route("/memorivise/delete/<int:id>")
+def delete(id):
+    card_to_delete = Revise.query.get(id)
+
+    try:
+        db.session.delete(card_to_delete)
+        db.session.commit()
+        return redirect("/memorivise")
+
+    except:
+        return "there was a problem deleting the card."
+
+
+@views.route("/memorivise/update/<int:id>", methods=['POST', 'GET'])
+def update(id):
+    update = Revise.query.get_or_404(id)
+
+    if request.method == 'POST':
+        update.title = request.form['title']
+        update.description = request.form['description']
+
+        try:
+            db.session.commit()
+            return redirect('/memorivise')
+
+        except:
+            return "Sorry! there was a problem updating the card"
+
+    else:
+        return render_template("update.html", update=update, user=current_user)
 
 @views.route('/books')
 def Books():
