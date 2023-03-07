@@ -167,7 +167,7 @@ def memorivise_update(id):
 
     if request.method == 'POST':
         update.title = request.form['title']
-        update.description = request.form['description']
+        update.document = request.form['document']
 
         try:
             db.session.commit()
@@ -178,7 +178,7 @@ def memorivise_update(id):
             return "Sorry! there was a problem updating the card"
 
     else:
-        return render_template("update.html", update=update, user=current_user)
+        return render_template("update_memorivise.html", update=update, user=current_user)
 
 @views.route('/books')
 def Books():
