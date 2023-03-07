@@ -45,7 +45,7 @@
                   </p>
                   <a
                   class="card-link"
-                  id="revise_test"
+                  id="memorivise_test"
                   data-bs-toggle="modal"
                   data-bs-target="#exampleModal"
                   data-toggle="modal"
@@ -77,7 +77,7 @@
                       ></button>
                     </div>
                     <div class="modal-body">
-                      <form>
+                      <form method="POST" action="/memorivise/memorivise_test">
                         <div class="form-group">
                           <label for="exampleFormControlTextarea1"
                             >Enter the content to revise</label
@@ -86,6 +86,7 @@
                             class="form-control"
                             id="exampleFormControlTextarea1"
                             rows="3"
+                            name="memorivise_test"
                           ></textarea>
                         </div>
                       </form>
@@ -98,7 +99,7 @@
                       >
                         Close
                       </button> -->
-                      <button type="button" class="btn btn-primary">
+                      <button type="button" class="btn btn-primary" id="testReviseSubmit">
                         Test
                       </button>
                     </div>
