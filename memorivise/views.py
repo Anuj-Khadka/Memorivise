@@ -136,8 +136,8 @@ def memorivise_test():
         #     Revise.description == user_data).all()
 
         # this is case insensetive check
-        result = db.session.query(Revise).filter(
-            Revise.description.ilike(user_data)).all()
+        result = db.session.query(MemoriviseDB).filter(
+            MemoriviseDB.description.ilike(user_data)).all()
         if result:
             flash("yes it is correct", category="success")
             return redirect("/memorivise")
@@ -148,8 +148,8 @@ def memorivise_test():
     
 
 @views.route("/memorivise/delete/<int:id>")
-def delete(id):
-    card_to_delete = Revise.query.get(id)
+def memorivise_delete(id):
+    card_to_delete = MemoriviseDB.query.get(id)
 
     try:
         db.session.delete(card_to_delete)
@@ -161,8 +161,8 @@ def delete(id):
 
 
 @views.route("/memorivise/update/<int:id>", methods=['POST', 'GET'])
-def update(id):
-    update = Revise.query.get_or_404(id)
+def memorivise_update(id):
+    update = MemoriviseDB.query.get_or_404(id)
 
     if request.method == 'POST':
         update.title = request.form['title']
