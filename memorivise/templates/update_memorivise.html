@@ -1,0 +1,52 @@
+{% extends 'base.html' %} {% block title %}
+<title>Update Memorevise</title>
+{% endblock title %} {% block body %}
+<div class="container">
+  <form class="mt-3" method="POST" action="/memorivise/update/{{update.id}}">
+    <div class="mb-3">
+      <label for="title" class="form-label">Title</label>
+      <input
+        type="text"
+        class="form-control"
+        name="title"
+        id="title"
+        aria-describedby=""
+        autocomplete="off"
+        value="{{update.title}}"
+      />
+    </div>
+    <div class="mb-3">
+      <label for="decsription" class="form-label">Description</label>
+      <textarea
+        class="form-control"
+        id="transcribed-text"
+        name="document"
+        rows="10"
+        cols="50"
+      >
+        {{update.document}}
+        </textarea
+      >
+    </div>
+    <div class="mt-3">
+      <a id="transcribe-btn" class="btn btn-secondary me-2">Start Recording</a>
+      <button id="stop-btn" class="btn btn-secondary" type="submit">
+        Submit Problem
+      </button>
+    </div>
+  </form>
+</div>
+<script>
+  const transcribeBtn = document.getElementById("transcribe-btn");
+  const transcribedText = document.getElementById("transcribed-text");
+
+  transcribeBtn.addEventListener("click", () => {
+    fetch("/transcribe")
+      .then((response) => response.json())
+      .then((text) => {
+        transcribedText.value = text.text;
+        // console.log(text)
+      });
+  });
+</script>
+{% endblock body %}
