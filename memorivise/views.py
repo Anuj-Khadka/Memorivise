@@ -132,12 +132,12 @@ def memorivise_test():
     if request.method == 'POST':
         user_data = request.form['memorivise_test'].lower()
         # this will check case sensetive 
-        # result = db.session.query(Revise).filter(
-        #     Revise.description == user_data).all()
+        # result = db.session.query(MemoriviseDB).filter(
+        #     MemoriviseDB.description == user_data).all()
 
         # this is case insensetive check
         result = db.session.query(MemoriviseDB).filter(
-            MemoriviseDB.description.ilike(user_data)).all()
+            MemoriviseDB.document.ilike(user_data)).all()
         if result:
             flash("yes it is correct", category="success")
             return redirect("/memorivise")
@@ -154,6 +154,7 @@ def memorivise_delete(id):
     try:
         db.session.delete(card_to_delete)
         db.session.commit()
+        flash("Test card deleted successfully!", category="success")
         return redirect("/memorivise")
 
     except:
@@ -170,6 +171,7 @@ def memorivise_update(id):
 
         try:
             db.session.commit()
+            flash("Test card updated successfully!", category="success")
             return redirect('/memorivise')
 
         except:
