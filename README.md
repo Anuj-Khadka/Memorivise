@@ -6,3 +6,5 @@ This is an application that helps people to revise the thing that they have lear
 * email: demo@memo.org<br>
 * username: demo<br>
 * password: demo123<br>
+
+**you can create your own account and personalize the workspace as well.**
