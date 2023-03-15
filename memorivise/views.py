@@ -203,6 +203,18 @@ def Biology():
 def Chemistry():
     return render_template('chemistry.html', user=current_user)
 
+@views.route('/studygames')
+def studygames():
+    return render_template('studygames.html', user=current_user)
+
+@views.route('/learning')
+def learning():
+    return render_template('learning.html', user=current_user)
+
+@views.route('/quiz')
+def quiz():
+    return render_template('quiz.html', user=current_user)
+
 
 @views.route('/transcribe')
 def transcribe_speech():
