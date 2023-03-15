@@ -1,0 +1,118 @@
+{% extends 'base.html' %} {% block title%}
+<title>Quiz</title>
+{% endblock title%} {% block body%}
+<hr />
+<h2 class="text-center">Quiz</h2>
+<hr />
+<div id="quiz">
+    <h1>General</h1>
+    <h2 id="question"></h2>
+    <ul id="choices"></ul>
+    <button id="submit">Submit</button>
+    <p id="score"></p>
+  </div>
+<style>
+    #quiz {
+  margin: auto;
+  width: 50%;
+  text-align: center;
+}
+
+h1, h2 {
+  margin-bottom: 10px;
+}
+
+#choices {
+  list-style-type: none;
+  padding: 0;
+}
+
+#choices li {
+  margin-bottom: 10px;
+}
+
+#submit {
+  margin-top: 10px;
+  padding: 10px;
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+#submit:hover {
+  background-color: #3e8e41;
+}
+
+</style>  
+<script>
+    var quizData = [
+  {
+    question: "What is the capital of France?",
+    choices: ["Paris", "London", "Madrid", "Berlin"],
+    answer: "Paris"
+  },
+  {
+    question: "What is the tallest mountain in the world?",
+    choices: ["Mount Everest", "Kilimanjaro", "Denali", "Mount Fuji"],
+    answer: "Mount Everest"
+  },
+  {
+    question: "What is the smallest country in the world?",
+    choices: ["Monaco", "San Marino", "Vatican City", "Liechtenstein"],
+    answer: "Vatican City"
+  }
+];
+
+var currentQuestion = 0;
+var score = 0;
+
+var questionEl = document.getElementById("question");
+var choicesEl = document.getElementById("choices");
+var submitBtn = document.getElementById("submit");
+var scoreEl = document.getElementById("score");
+
+function loadQuestion() {
+  var currentQuizData = quizData[currentQuestion];
+  questionEl.innerHTML = currentQuizData.question;
+  choicesEl.innerHTML = "";
+  for (var i = 0; i < currentQuizData.choices.length; i++) {
+    var choice = currentQuizData.choices[i];
+    var li = document.createElement("li");
+    li.innerHTML = "<input type='radio' name='choice' value='" + choice + "'>" + choice;
+    choicesEl.appendChild(li);
+  }
+}
+
+function submitAnswer() {
+  var selectedChoice = document.querySelector('input[name="choice"]:checked');
+  if (!selectedChoice) {
+    alert("Please select an answer.");
+    return;
+  }
+  var answer = selectedChoice.value;
+  if (answer === quizData[currentQuestion].answer) {
+    score++;
+  }
+  selectedChoice.checked = false;
+  currentQuestion++;
+  if (currentQuestion === quizData.length) {
+    quizEnd();
+  } else {
+    loadQuestion();
+  }
+}
+
+function quizEnd() {
+  questionEl.innerHTML = "Quiz complete!";
+  choicesEl.style.display = "none";
+  submitBtn.style.display = "none";
+  scoreEl.innerHTML = "Your score is " + score + " out of " + quizData.length;
+}
+
+loadQuestion();
+submitBtn.addEventListener("click", submitAnswer);
+
+</script>
+{% endblock body %}

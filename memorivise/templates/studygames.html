@@ -1,0 +1,52 @@
+{% extends 'base.html' %} {% block title%}
+<title>Study games</title>
+{% endblock title%} {% block body%}
+<hr />
+<h2 class="text-center">Study games</h2>
+<hr />
+<div class="icon-container">
+    <figure>
+      <a href="/quiz"><img src="..\static\img\quiz.png"></a>
+      <figcaption><b>quizzes</b></figcaption>
+    </figure>
+    <figure>
+      <a href="#"><img src="..\static\img\matching.jpeg"></a>
+      <figcaption><b>Matching game</b></figcaption>
+    </figure>
+    <figure>
+        <a href="#"><img src="..\static\img\simulation.jpg"></a>
+        <figcaption><b>Simulation game</b></figcaption>
+      </figure>
+  </div>
+  <style>
+      img {
+    float: left;
+    height: 400px;
+    width: 290px;
+    border-radius: 20%;
+  }
+
+  .icon-container {
+    display: flex;
+  }
+
+  .icon-container figure {
+    margin-right: 70px;
+    margin-bottom: 15px;
+    margin-left: 70px;
+    text-align: center;
+  }
+
+  .icon-container img:hover {
+    opacity: 0.7;
+    cursor: pointer;
+    /* transform: scale(1.1); */
+  }
+
+  .icon-container figcaption {
+    font-size: 15px;
+    margin-top: 15px;
+    margin-bottom: 15px;
+  }
+  </style>
+{% endblock body %}
