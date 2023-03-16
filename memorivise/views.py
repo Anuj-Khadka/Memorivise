@@ -131,20 +131,36 @@ def Memorivise():
 def memorivise_test():
     if request.method == 'POST':
         user_data = request.form['memorivise_test'].lower()
-        # this will check case sensetive 
-        # result = db.session.query(MemoriviseDB).filter(
-        #     MemoriviseDB.description == user_data).all()
+        stored_data = db.session.query(MemoriviseDB.document).one()[0].lower()
+        user_words = user_data.split()
+        stored_words = stored_data.split()
 
-        # this is case insensetive check
-        result = db.session.query(MemoriviseDB).filter(
-            MemoriviseDB.document.ilike(user_data)).all()
-        if result:
-            flash("yes it is correct", category="success")
+        # Check if both lists of words match exactly
+        if user_words == stored_words:
+            flash("Correct! You remembered the sentence perfectly!", category="success")
             return redirect("/memorivise")
-        else:
-            flash("no try again", category="error")
-            return redirect("/memorivise")
+        
+        # Check if user is missing any words from the stored sentence
+        if set(stored_words) > set(user_words):
+            missing_words = ', '.join(set(stored_words) - set(user_words))
+            flash(f"You're missing the word(s): {missing_words}", category="error")
+        
+        # Check if user added any extra words to the sentence
+        if set(user_words) > set(stored_words):
+            extra_words = ', '.join(set(user_words) - set(stored_words))
+            flash(f"You added the word(s): {extra_words}", category="error")
+        
+        # If the sentence is incorrect but no missing or extra words were found, show a generic error message
+        if not missing_words and not extra_words:
+            flash("Incorrect. Please try again.", category="error")
+        
+        return redirect("/memorivise")
     return render_template('memorivise.html', user=current_user)
+
+
+
+
+
     
 
 @views.route("/memorivise/delete/<int:id>")
