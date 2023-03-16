@@ -141,7 +141,7 @@ def memorivise_test():
             return redirect("/memorivise")
         
         # Check if user is missing any words from the stored sentence
-        if set(stored_words) > set(user_words):
+        if len(stored_words) > len(user_words):
             missing_words = ', '.join(set(stored_words) - set(user_words))
             flash(f"You're missing the word(s): {missing_words}", category="error")
         
@@ -151,7 +151,8 @@ def memorivise_test():
             flash(f"You added the word(s): {extra_words}", category="error")
         
         # If the sentence is incorrect but no missing or extra words were found, show a generic error message
-        if not missing_words and not extra_words:
+        # if not missing_words and not extra_words:
+        else:
             flash("Incorrect. Please try again.", category="error")
         
         return redirect("/memorivise")
