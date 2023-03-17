@@ -30,14 +30,14 @@ searchSubmit.addEventListener("click", () => {
 
 let resourceDrop = document.getElementById("resource-drop")
 
-resourceDrop.addEventListener("mouseenter", (e)=>{
+resourceDrop.addEventListener("click", (e)=>{
   let resourceSubMenu = document.getElementById("resource-dropdown-menu")
-  resourceSubMenu.classList.add("show")
+  resourceSubMenu.classList.toggle("show")
 })
-resourceDrop.addEventListener("mouseleave", (e)=>{
-  let resourceSubMenu = document.getElementById("resource-dropdown-menu")
-  resourceSubMenu.classList.remove("show")
-})
+// resourceDrop.addEventListener("mouseleave", (e)=>{
+//   let resourceSubMenu = document.getElementById("resource-dropdown-menu")
+//   resourceSubMenu.classList.remove("show")
+// })
 
 
 
