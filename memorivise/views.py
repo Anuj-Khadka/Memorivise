@@ -103,9 +103,9 @@ def contact():
     return render_template("contact.html", user=current_user)
 
 
-@views.route("/resources",)
-def resources():
-    return render_template("resources.html")
+# @views.route("/resources",)
+# def resources():
+#     return render_template("resources.html")
 
 
 @views.route('/memorivise', methods=['POST', 'GET'])
