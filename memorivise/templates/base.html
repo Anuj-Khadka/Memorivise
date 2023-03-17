@@ -56,8 +56,17 @@
                 </li>
                 <li><hr class="dropdown-divider" /></li>
                 <li>
-                  <a class="dropdown-item" href="/resources">Resources</a>
-                </li>
+                  <!-- <a class="dropdown-item" >Resources</a> -->
+                  <a class="dropdown-item dropdown-toggle" id="resource-drop" href="/resources">Resources</a>
+                  <div class="dropdown-submenu" >
+                    <ul class="dropdown-menu" id="resource-dropdown-menu">
+                      <li><a class="dropdown-item" href="#">Submenu item 1</a></li>
+                      <li><a class="dropdown-item" href="#">Submenu item 2</a></li>
+                    </ul>
+                  </div>
+                </li> 
+                
+                    
               </ul>
             </li>
             <li class="nav-item me-3">
@@ -120,7 +129,8 @@
           {% endif %}
         </div>
       </div>
-    </nav>
+   </nav> 
+
     {% with messages = get_flashed_messages(with_categories=true) %} 
     {% if messages %}
     {% for category, message in messages %} 
