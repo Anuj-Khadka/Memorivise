@@ -26,3 +26,22 @@ searchSubmit.addEventListener("click", () => {
   searchExpand.classList.toggle("d-none");
 });
 
+
+
+let resourceDrop = document.getElementById("resource-drop")
+
+resourceDrop.addEventListener("mouseenter", (e)=>{
+  let resourceSubMenu = document.getElementById("resource-dropdown-menu")
+  resourceSubMenu.classList.add("show")
+})
+resourceDrop.addEventListener("mouseleave", (e)=>{
+  let resourceSubMenu = document.getElementById("resource-dropdown-menu")
+  resourceSubMenu.classList.remove("show")
+})
+
+
+
+
+
+
+
