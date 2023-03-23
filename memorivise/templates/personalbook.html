@@ -1,0 +1,70 @@
+{% extends 'base.html' %} {% block title%}
+<title>Self Learning Books</title>
+{% endblock title%} {% block body %}
+
+<body>
+    <div class="container">
+        <hr />
+        <h2 class="text-center">Self Learning Books</h2>
+        <hr />
+        <div class="row">
+            <div class="card-list">
+                <div class="card">
+                    <img src="../static/img/books/rich_dad_poor_dad.jpg" class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <h5 class="card-title">Rich Dad Poor Dad</h5>
+                        <a href="#" class="btn btn-primary">Read & Download</a>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <img src="../static/img/books/Atomic_Habits.jpg" class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <h5 class="card-title">Atomic Habits</h5>
+                        <a href="#" class="btn btn-primary">Read & Download</a>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <img src="../static/img/books/think.jpg" class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <h5 class="card-title">Think and Grow Rich</h5>
+                        <a href="#" class="btn btn-primary">Read & Download</a>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <img src="../static/img/books/psx.jpg" class="card-img-top"  alt="...">
+                    <div class="card-body">
+                        <h5 class="card-title">Psychology of Money</h5>
+                        <a href="#" class="btn btn-primary">Read & Download</a>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</body>
+<style>
+    .card {
+        width: 15rem;
+        height: 320px;
+        border-radius: 20px;
+        background-color: rgb(158, 144, 124);
+        float: left;
+        margin-right: 15px;
+        margin-left: 15px;
+    }
+
+    .card img {
+        border-radius: 20px;
+        height: 100%;
+        width: 100%;
+    }
+    .card-body h5{
+        font-family: 'Times New Roman', Times, serif;
+        text-align: center;
+    }
+    
+</style>
+{% endblock body %}

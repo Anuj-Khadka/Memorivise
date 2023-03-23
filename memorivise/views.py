@@ -224,6 +224,10 @@ def Chemistry():
 def studygames():
     return render_template('studygames.html', user=current_user)
 
+@views.route('/personalbook')
+def personalbook():
+    return render_template('personalbook.html', user=current_user)
+
 @views.route('/learning')
 def learning():
     return render_template('learning.html', user=current_user)
