@@ -133,43 +133,16 @@ def Memorivise():
 def memorivise_test():
     if request.method == 'POST':
         user_data = request.form['memorivise_test'].lower()
-        stored_data = db.session.query(MemoriviseDB.document)
 
-        # Check if both lists of words match exactly
-        # if user_words == stored_words:
-        #     flash("Correct! You remembered the sentence perfectly!", category="success")
-        #     return redirect("/memorivise")
-
-        # # Check if user is missing any words from the stored sentence
-        # if len(stored_words) > len(user_words):
-        #     missing_words = ', '.join(set(stored_words) - set(user_words))
-        #     flash(f"You're missing the word(s): {missing_words}", category="error")
-
-        # # Check if user added any extra words to the sentence
-        # if set(user_words) > set(stored_words):
-        #     extra_words = ', '.join(set(user_words) - set(stored_words))
-        #     flash(f"You added the word(s): {extra_words}", category="error")
-
-        # # If the sentence is incorrect but no missing or extra words were found, show a generic error message
-        # # if not missing_words and not extra_words:
-        # else:
-        #     flash("Incorrect. Please try again.", category="error")
-
-        correct_words = stored_data.split()
-        words_to_check = user_data.split()
-
-        if len(correct_words) != len(words_to_check):
-            flash("Incorrect. Please try again.", category="error")
-            # return 'Incorrect'
-        for i in range(len(correct_words)):
-            if correct_words[i] != words_to_check[i]:
-                flash("Incorrect. Please try again.", category="error")
-                # return 'Incorrect'
-
-        # return 'Correct'
-        flash("Correct! You remembered the sentence perfectly!", category="success")
-
-        return redirect("/memorivise")
+        # this is case insensetive check
+        result = db.session.query(MemoriviseDB).filter(
+            MemoriviseDB.document.ilike(user_data))
+        if result:
+            flash("yes it is correct", category="success")
+            return redirect("/memorivise")
+        else:
+            flash("no try again", category="error")
+            return redirect("/memorivise")
     return render_template('memorivise.html', user=current_user)
 
 
