@@ -1,4 +1,5 @@
 from flask import Flask, Blueprint, render_template, request, redirect, flash, jsonify
+from sqlalchemy import engine
 from .models import Revise, Contact, MemoriviseDB
 from .speech import transcribe
 from . import db
@@ -36,7 +37,7 @@ def revise():
 def revise_test():
     if request.method == 'POST':
         user_data = request.form['revise_test'].lower()
-        # this will check case sensetive 
+        # this will check case sensetive
         # result = db.session.query(Revise).filter(
         #     Revise.description == user_data).all()
 
@@ -126,43 +127,51 @@ def Memorivise():
     else:
         revisions = MemoriviseDB.query.order_by(MemoriviseDB.date).all()
         return render_template('memorivise.html', revisions=revisions, user=current_user)
-    
+
+
 @views.route("/memorivise/memorivise_test", methods=["POST", "GET"])
 def memorivise_test():
     if request.method == 'POST':
         user_data = request.form['memorivise_test'].lower()
-        stored_data = db.session.query(MemoriviseDB.document).one()[0].lower()
-        user_words = user_data.split()
-        stored_words = stored_data.split()
+        stored_data = db.session.query(MemoriviseDB.document)
 
         # Check if both lists of words match exactly
-        if user_words == stored_words:
-            flash("Correct! You remembered the sentence perfectly!", category="success")
-            return redirect("/memorivise")
-        
-        # Check if user is missing any words from the stored sentence
-        if len(stored_words) > len(user_words):
-            missing_words = ', '.join(set(stored_words) - set(user_words))
-            flash(f"You're missing the word(s): {missing_words}", category="error")
-        
-        # Check if user added any extra words to the sentence
-        if set(user_words) > set(stored_words):
-            extra_words = ', '.join(set(user_words) - set(stored_words))
-            flash(f"You added the word(s): {extra_words}", category="error")
-        
-        # If the sentence is incorrect but no missing or extra words were found, show a generic error message
-        # if not missing_words and not extra_words:
-        else:
+        # if user_words == stored_words:
+        #     flash("Correct! You remembered the sentence perfectly!", category="success")
+        #     return redirect("/memorivise")
+
+        # # Check if user is missing any words from the stored sentence
+        # if len(stored_words) > len(user_words):
+        #     missing_words = ', '.join(set(stored_words) - set(user_words))
+        #     flash(f"You're missing the word(s): {missing_words}", category="error")
+
+        # # Check if user added any extra words to the sentence
+        # if set(user_words) > set(stored_words):
+        #     extra_words = ', '.join(set(user_words) - set(stored_words))
+        #     flash(f"You added the word(s): {extra_words}", category="error")
+
+        # # If the sentence is incorrect but no missing or extra words were found, show a generic error message
+        # # if not missing_words and not extra_words:
+        # else:
+        #     flash("Incorrect. Please try again.", category="error")
+
+        correct_words = stored_data.split()
+        words_to_check = user_data.split()
+
+        if len(correct_words) != len(words_to_check):
             flash("Incorrect. Please try again.", category="error")
-        
+            # return 'Incorrect'
+        for i in range(len(correct_words)):
+            if correct_words[i] != words_to_check[i]:
+                flash("Incorrect. Please try again.", category="error")
+                # return 'Incorrect'
+
+        # return 'Correct'
+        flash("Correct! You remembered the sentence perfectly!", category="success")
+
         return redirect("/memorivise")
     return render_template('memorivise.html', user=current_user)
 
-
-
-
-
-    
 
 @views.route("/memorivise/delete/<int:id>")
 def memorivise_delete(id):
@@ -197,6 +206,7 @@ def memorivise_update(id):
     else:
         return render_template("update_memorivise.html", update=update, user=current_user)
 
+
 @views.route('/books')
 def Books():
     return render_template('books.html', user=current_user)
@@ -216,21 +226,26 @@ def Physics():
 def Biology():
     return render_template('biology.html', user=current_user)
 
+
 @views.route('/chemistry')
 def Chemistry():
     return render_template('chemistry.html', user=current_user)
+
 
 @views.route('/studygames')
 def studygames():
     return render_template('studygames.html', user=current_user)
 
+
 @views.route('/personalbook')
 def personalbook():
     return render_template('personalbook.html', user=current_user)
 
+
 @views.route('/learning')
 def learning():
     return render_template('learning.html', user=current_user)
+
 
 @views.route('/quiz')
 def quiz():
