@@ -12,9 +12,6 @@
       "dest": "/app"
     }
   ],
-  "rewrites": [
-    { "source": "/(.*)", "destination": "/app" }
-  ]
   "env": {
     "FLASK_ENV": "production"
   }
