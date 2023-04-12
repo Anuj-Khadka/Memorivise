@@ -1,0 +1,61 @@
+{% extends 'base.html' %} {% block title%}
+<title>Quiz</title>
+{% endblock title%} {% block body%}
+<div class="container">
+  <hr />
+  <h2 class="text-center">Simulations</h2>
+  <hr />
+  </div>
+  <style>
+    canvas {
+  display: block;
+  margin: auto;
+}
+  </style>
+  <script>
+    let ball;
+let gravity;
+
+function setup() {
+  createCanvas(600, 400);
+  ball = new Ball(100, 100, 30);
+  gravity = createVector(0, 0.1);
+}
+
+function draw() {
+  background(220);
+  ball.applyForce(gravity);
+  ball.update();
+  ball.display();
+}
+
+class Ball {
+  constructor(x, y, r) {
+    this.position = createVector(x, y);
+    this.velocity = createVector(0, 0);
+    this.acceleration = createVector(0, 0);
+    this.mass = 1;
+    this.radius = r;
+  }
+
+  applyForce(force) {
+    let f = force.copy().div(this.mass);
+    this.acceleration.add(f);
+  }
+
+  update() {
+    this.velocity.add(this.acceleration);
+    this.position.add(this.velocity);
+    this.acceleration.set(0, 0);
+  }
+
+  display() {
+    stroke(0);
+    fill(175);
+    ellipse(this.position.x, this.position.y, this.radius * 2);
+  }
+}
+
+  </script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.0/p5.min.js"></script>
+  {% endblock body %}

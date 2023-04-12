@@ -104,9 +104,9 @@ def contact():
     return render_template("contact.html", user=current_user)
 
 
-# @views.route("/resources",)
-# def resources():
-#     return render_template("resources.html")
+@views.route("/resources",)
+def resources():
+    return render_template("resources.html")
 
 
 @views.route('/memorivise', methods=['POST', 'GET'])
@@ -223,6 +223,14 @@ def learning():
 @views.route('/quiz')
 def quiz():
     return render_template('quiz.html', user=current_user)
+
+@views.route('/simulations')
+def simulations():
+    return render_template('simulations.html', user=current_user)
+
+@views.route('/sat')
+def sat():
+    return render_template('sat.html', user=current_user)
 
 
 @views.route('/transcribe')
