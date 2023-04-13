@@ -224,6 +224,10 @@ def learning():
 def quiz():
     return render_template('quiz.html', user=current_user)
 
+@views.route('/class10')
+def class10():
+    return render_template('class10.html', user=current_user)
+
 @views.route('/simulations')
 def simulations():
     return render_template('simulations.html', user=current_user)
