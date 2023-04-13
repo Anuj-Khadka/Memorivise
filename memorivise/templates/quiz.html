@@ -1,18 +1,23 @@
-{% extends 'base.html' %} {% block title%}
-<title>Quiz</title>
-{% endblock title%} {% block body%}
+{% extends 'base.html' %}
+
+{% block title%}
+<title>Quizes and MCQ's</title>
+{% endblock title %}
+
+{% block body %}
 <div class="container">
   <hr />
-  <h2 class="text-center">Quiz</h2>
+  <h2 class="text-center">Quizes and MCQ's</h2>
   <hr />
   <div id="quiz" class="px-5 bg-dark-subtle py-5 rounded">
-    <!-- <h3>General</h3> -->
     <h4 id="question"></h4>
     <ul id="choices"></ul>
     <button id="submit">Submit</button>
+    <p id="response"></p>
     <p id="score"></p>
   </div>
 </div>
+
 <style>
   #quiz {
     margin: auto;
@@ -46,77 +51,82 @@
     background-color: #3e8e41;
   }
 </style>
+
 <script>
-  var quizData = [
-    {
-      question: "What is the capital of France?",
-      choices: ["Paris", "London", "Madrid", "Berlin"],
-      answer: "Paris",
-    },
-    {
-      question: "What is the tallest mountain in the world?",
-      choices: ["Mount Everest", "Kilimanjaro", "Denali", "Mount Fuji"],
-      answer: "Mount Everest",
-    },
-    {
-      question: "What is the smallest country in the world?",
-      choices: ["Monaco", "San Marino", "Vatican City", "Liechtenstein"],
-      answer: "Vatican City",
-    },
-  ];
+var quizData = [
+  {
+    question: "What is the capital of France?",
+    choices: ["Paris", "London", "Madrid", "Berlin"],
+    answer: "Paris",
+  },
+  {
+    question: "What is the tallest mountain in the world?",
+    choices: ["Mount Everest", "Kilimanjaro", "Denali", "Mount Fuji"],
+    answer: "Mount Everest",
+  },
+  {
+    question: "What is the smallest country in the world?",
+    choices: ["Monaco", "San Marino", "Vatican City", "Liechtenstein"],
+    answer: "Vatican City",
+  },
+];
 
-  let currentQuestion = 0;
-  let score = 0;
+let currentQuestion = 0;
+let score = 0;
 
-  let questionEl = document.getElementById("question");
-  let choicesEl = document.getElementById("choices");
-  let submitBtn = document.getElementById("submit");
-  let scoreEl = document.getElementById("score");
+let questionEl = document.getElementById("question");
+let choicesEl = document.getElementById("choices");
+let submitBtn = document.getElementById("submit");
+let scoreEl = document.getElementById("score");
+let responseEl = document.getElementById("response");
 
-  function loadQuestion() {
-    let currentQuizData = quizData[currentQuestion];
-    questionEl.innerHTML = currentQuizData.question;
-    choicesEl.innerHTML = "";
-    for (var i = 0; i < currentQuizData.choices.length; i++) {
-      let choice = currentQuizData.choices[i];
-      let li = document.createElement("li");
-      li.innerHTML = `
-        <label for="${choice}_element">
-          <input type='radio' name='choice' id="${choice}_element" value=${choice}>${choice}
-        </label>  
-          `;
-      choicesEl.appendChild(li);
-    }
+function loadQuestion() {
+  let currentQuizData = quizData[currentQuestion];
+  questionEl.innerHTML = currentQuizData.question;
+  choicesEl.innerHTML = "";
+  for (var i = 0; i < currentQuizData.choices.length; i++) {
+    let choice = currentQuizData.choices[i];
+    let li = document.createElement("li");
+    li.innerHTML = `
+      <label for="${choice}_element">
+        <input type='radio' name='choice' id="${choice}_element" value=${choice}>${choice}
+      </label>  
+    `;
+    choicesEl.appendChild(li);
   }
+}
 
-  function submitAnswer() {
-    let selectedChoice = document.querySelector('input[name="choice"]:checked');
-    if (!selectedChoice) {
-      alert("Please select an answer.");
-      return;
-    }
-    let answer = selectedChoice.value;
-    if (answer === quizData[currentQuestion].answer) {
-      score++;
-    }
-    selectedChoice.checked = false;
-    currentQuestion++;
-    if (currentQuestion === quizData.length) {
-      quizEnd();
-    } else {
-      loadQuestion();
-    }
+function submitAnswer() {
+  let selectedChoice = document.querySelector('input[name="choice"]:checked');
+  if (!selectedChoice) {
+    alert("Please select an answer.");
+    return;
   }
-
-  function quizEnd() {
-    questionEl.innerHTML = "Quiz complete!";
-    choicesEl.style.display = "none";
-    submitBtn.style.display = "none";
-    scoreEl.innerHTML = `Your score is ${score} out of ${quizData.length}`;
-    scoreEl.insertAdjacentHTML("afterend", `<button class="btn btn-secondary"><a class="text-light" href="https://google.com">Return Home</a></button>`)
+  let answer = selectedChoice.value;
+  if (answer === quizData[currentQuestion].answer) {
+    score++;
+    responseEl.innerHTML = "<span style='color:green;'>Correct!</span>";
+  } else {
+    responseEl.innerHTML = `<span style='color:red;'>Incorrect. The correct answer is ${quizData[currentQuestion].answer}.</span>`;
   }
+  selectedChoice.checked = false;
+  currentQuestion++;
+  if (currentQuestion === quizData.length) {
+    quizEnd();
+  } else {
+    loadQuestion();
+  }
+}
 
-  loadQuestion();
-  submitBtn.addEventListener("click", submitAnswer);
+function quizEnd() {
+  questionEl.innerHTML = "Quiz Complete!";
+  choicesEl.innerHTML = "";
+  submitBtn.style.display = "none";
+  scoreEl.innerHTML = `You got ${score} out of ${quizData.length} correct!`;
+}
+
+loadQuestion();
+
+submitBtn.addEventListener("click", submitAnswer);
 </script>
-{% endblock body %}
+{% endblock %}

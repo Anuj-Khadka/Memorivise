@@ -1,0 +1,99 @@
+{% extends 'base.html' %} {% block title%}
+<title>Science Books</title>
+{% endblock title%} {% block body %}
+</head>
+
+<body>
+  <div class="container">
+    <header>
+      <h1 class="text-center">Memorivise books -> class-10</h1>
+    </header>
+    <hr />
+    <div class="row">
+      <div class="card-list">
+        <div class="card">
+          <img src="../static/img/books/class10p2.png" class="card-img-top" alt="...">
+          <div class="card-body">
+            <h5 class="card-title">Farm Management</h5>
+            <a href="#" class="btn btn-primary">Read & Download</a>
+          </div>
+        </div>
+
+        <div class="card">
+          <img src="../static/img/books/class10p2.png" class="card-img-top" alt="...">
+          <div class="card-body">
+            <h5 class="card-title">Foliculture Management</h5>
+            <a href="#" class="btn btn-primary">Read & Download</a>
+          </div>
+        </div>
+
+        <div class="card">
+          <img src="../static/img/books/class10p3.png" class="card-img-top" alt="...">
+          <div class="card-body">
+            <h5 class="card-title"> Aquaculture & Fisheries</h5>
+            <a href="#" class="btn btn-primary">Read & Download</a>
+          </div>
+        </div>
+
+        <div class="card">
+          <img src="../static/img/books/class10p4.png" class="card-img-top" alt="...">
+          <div class="card-body">
+            <h5 class="card-title">Vegetable & Medicinal</h5>
+            <a href="#" class="btn btn-primary" mx-1>Read & Download</a>
+          </div>
+        </div>
+
+        <div class="card">
+            <img src="../static/img/books/class10english.jpg" class="card-img-top" alt="...">
+            <div class="card-body">
+              <h5 class="card-title">English</h5>
+              <a href="#" class="btn btn-primary">Read & Download</a>
+            </div>
+          </div>
+  
+          <div class="card">
+            <img src="../static/img/books/class10Vigyan.jpg" class="card-img-top" alt="...">
+            <div class="card-body">
+              <h5 class="card-title">विज्ञान</h5>
+              <a href="#" class="btn btn-primary">Read & Download</a>
+            </div>
+          </div>
+  
+          <div class="card">
+            <img src="../static/img/books/class10science.jpg" class="card-img-top" alt="...">
+            <div class="card-body">
+              <h5 class="card-title">Science</h5>
+              <a href="#" class="btn btn-primary" mx-1>Read & Download</a>
+            </div>
+          </div>
+
+      </div>
+    </div>
+    <style>
+        .card {
+               width: 15.5rem;
+               height: 370px;
+               border-radius: 20px;
+               background-color: rgb(158, 144, 124);
+               float: left;
+               margin-right: 15px;
+               margin-left: 15px;
+               margin-bottom: 30px;
+           }
+       
+           .card img {
+               border-radius: 20px;
+               height: 70%;
+               width: 100%;
+           }
+           .card-body h5{
+               font-family: 'Times New Roman', Times, serif;
+               text-align: center;
+           }
+           .card-body a {
+               width: auto;
+               margin-left: 20px;
+           }
+       
+       </style>
+{% endblock %}
