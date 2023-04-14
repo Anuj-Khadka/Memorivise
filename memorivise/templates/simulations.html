@@ -5,8 +5,31 @@
   <hr />
   <h2 class="text-center">Simulations</h2>
   <hr />
+  <div class="container-fluid row py-4 mb-5 d-flex gap-3 justify-content-center">
+    <div class="col-lg-4 card" style="width: 18rem" id="classes">
+      <div class="card-body">
+        <h4 class="card-title">Solar System</h4>
+        <a href="/solar" class="card-link">View this </a>
+      </div>
+    </div>
+
+    <div class="col-lg-4 card" style="width: 18rem" id="classes">
+      <div class="card-body">
+        <h4 class="card-title">Tidal hypothesis</h4>
+        <a href="#" class="card-link">View this </a>
+      </div>
+    </div>
+
+    <div class="col-lg-4 card" style="width: 18rem" id="classes">
+      <div class="card-body">
+        <h4 class="card-title">Force</h4>
+        <a href="#" class="card-link">View this </a>
+      </div>
+    </div>
+
   </div>
-  <style>
+</div>
+<!-- <style>
     canvas {
   display: block;
   margin: auto;
@@ -57,5 +80,15 @@ class Ball {
 }
 
   </script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.0/p5.min.js"></script>
-  {% endblock body %}
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.0/p5.min.js"></script> -->
+<style>
+  #classes {
+    transition: box-shadow 0.2s;
+  }
+
+  #classes:hover {
+    /* transform: translate(0, -0.5rem); */
+    box-shadow: 2px 3px 7px 1px #2b2b2b34;
+  }
+</style>
+{% endblock body %}

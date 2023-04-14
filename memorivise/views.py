@@ -236,6 +236,10 @@ def class9():
 def class10():
     return render_template('class10.html', user=current_user)
 
+@views.route('/class11science')
+def class11science():
+    return render_template('class11science.html', user=current_user)
+
 @views.route('/simulations')
 def simulations():
     return render_template('simulations.html', user=current_user)
@@ -243,6 +247,11 @@ def simulations():
 @views.route('/sat')
 def sat():
     return render_template('sat.html', user=current_user)
+
+@views.route('/solar')
+def solar():
+    return render_template('solar.html', user=current_user)
+
 
 
 @views.route('/transcribe')
