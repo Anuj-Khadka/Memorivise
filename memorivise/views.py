@@ -134,16 +134,35 @@ def memorivise_test():
     if request.method == 'POST':
         user_data = request.form['memorivise_test'].lower()
 
-        # this is case insensetive check
-        result = db.session.query(MemoriviseDB).filter(
-            MemoriviseDB.document.ilike(user_data))
+        # Check if user input matches the stored word
+        result = db.session.query(MemoriviseDB).filter(MemoriviseDB.document.ilike(user_data)).first()
+        
         if result:
-            flash("yes it is correct", category="success")
-            return redirect("/memorivise")
+            flash("Correct! You remembered the word.", category="success")
         else:
-            flash("no try again", category="error")
-            return redirect("/memorivise")
+            # Compare user input with each word in the stored document
+            stored_doc = db.session.query(MemoriviseDB).first().document.lower()
+            stored_words = stored_doc.split()
+            user_words = user_data.split()
+            wrong_words = []
+            
+            for i in range(len(stored_words)):
+                if i >= len(user_words):
+                    wrong_words.append(stored_words[i])
+                elif stored_words[i] != user_words[i]:
+                    wrong_words.append(stored_words[i])
+            
+            if len(wrong_words) == 0:
+                flash("Correct! You remembered the word.", category="success")
+            else:
+                flash(f"Incorrect. You missed or got the following word(s) wrong: {', '.join(wrong_words)}.", category="error")
+                
+        return redirect("/memorivise")
+    
     return render_template('memorivise.html', user=current_user)
+
+
+
 
 
 @views.route("/memorivise/delete/<int:id>")
@@ -252,6 +271,17 @@ def sat():
 def solar():
     return render_template('solar.html', user=current_user)
 
+@views.route('/simplependulum')
+def simplependulum():
+    return render_template('simplependulum.html', user=current_user)
+
+@views.route('/ohm')
+def ohm():
+    return render_template('ohm.html', user=current_user)
+
+@views.route('/force')
+def force():
+    return render_template('force.html', user=current_user)
 
 
 @views.route('/transcribe')

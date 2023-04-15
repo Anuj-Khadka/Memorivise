@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Simple Pendulum Simulation</title>
+  </head>
+  <body>
+    <h1>Simple Pendulum Simulation</h1>
+    <p>
+      A simple pendulum is a weight suspended from a pivot so that it can swing
+      freely. The motion of a simple pendulum is governed by the formula:
+  <br>
+ T = 2π √(L/g) <br>
+      where T is the period of the pendulum, L is the length of the pendulum arm,
+      and g is the acceleration due to gravity.
+    </p>
+    <canvas></canvas>
+  </body>
+  
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+    }
+
+    canvas {
+      display: block;
+      margin: 0 auto;
+    }
+
+    h1 {
+      text-align: center;
+      margin-top: 30px;
+    }
+
+    p {
+      text-align: center;
+      font-size: 18px;
+      margin-bottom: 20px;
+    }
+    </style>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.0/p5.min.js"></script>
+  <script>
+    let r; // length of pendulum arm
+    let angle; // angle of pendulum arm
+    let aVelocity; // angular velocity of pendulum arm
+    let aAcceleration; // angular acceleration of pendulum arm
+    let damping; // damping factor for pendulum arm
+    let pivot; // pivot point for pendulum arm
+
+    function setup() {
+      createCanvas(windowWidth, windowHeight);
+      r = min(windowWidth, windowHeight) / 3;
+      angle = PI / 4;
+      aVelocity = 0;
+      aAcceleration = 0;
+      damping = 0.995;
+      pivot = createVector(width / 2, 0);
+    }
+
+    function draw() {
+      background(255);
+
+      let gravity = 0.6; // acceleration due to gravity
+      aAcceleration = (-1 * gravity / r) * sin(angle); // calculate angular acceleration
+      aVelocity += aAcceleration; // update angular velocity
+      aVelocity *= damping; // apply damping
+      angle += aVelocity; // update angle
+
+      let pendulumEnd = createVector(r * sin(angle), r * cos(angle)); // calculate position of pendulum end
+      pendulumEnd.add(pivot); // add pivot point to pendulum end
+      stroke(0);
+      strokeWeight(2);
+      line(pivot.x, pivot.y, pendulumEnd.x, pendulumEnd.y); // draw pendulum arm
+      fill(175);
+      ellipse(pendulumEnd.x, pendulumEnd.y, 20, 20); // draw pendulum bob
+    }
+  </script>
+</html>
