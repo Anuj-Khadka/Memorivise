@@ -283,6 +283,10 @@ def ohm():
 def force():
     return render_template('force.html', user=current_user)
 
+@views.route('/tidal')
+def tidal():
+    return render_template('tidal.html', user=current_user)
+
 
 @views.route('/transcribe')
 def transcribe_speech():

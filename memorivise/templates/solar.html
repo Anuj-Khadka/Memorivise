@@ -26,8 +26,8 @@
     <img src="../static/img/simulations/asteroid.png" class="object" alt="" id="belt">
   </body>
 </div>
-  <style>
-    body {
+<style>
+  body {
     background: black;
     margin: 0;
     padding: 0;
@@ -123,7 +123,19 @@
     height: 4vmin;
     width: 4vmin;
   }
-  </style>
+  
+  @media only screen and (max-width: 767px) {
+    .p-orbit, #m-orbit {
+      height: 50%;
+      width: 50%;
+    }
+    
+    #belt {
+      display: none;
+    }
+  }
+</style>
+
   <script>
     const planets = document.querySelectorAll('.planet')
 const p_radii = [22,33,50,70,112,138,165,190]

@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tidal Hypothesis </title>
+  <style>
+    * {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background-color: #212121;
+  color: #fff;
+  font-family: Arial, sans-serif;
+}
+
+header {
+  background-color: #424242;
+  padding: 1rem;
+}
+
+h1 {
+  font-size: 2rem;
+  text-align: center;
+}
+
+main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-top: 2rem;
+}
+
+.container {
+  position: relative;
+  width: 20rem;
+  height: 20rem;
+  border: 2px solid #fff;
+  border-radius: 50%;
+  overflow: hidden;
+}
+
+.earth {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 6rem;
+  height: 6rem;
+  border-radius: 50%;
+  background-color: #00b0ff;
+}
+
+.moon {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 3rem;
+  height: 3rem;
+  border-radius: 50%;
+  background-color: #f5f5f5;
+}
+
+.explanation {
+  margin-top: 2rem;
+  width: 80%;
+}
+
+h2 {
+  font-size: 1.5rem;
+  margin-bottom: 0.5rem;
+}
+
+p {
+  margin-bottom: 1rem;
+}
+
+ul {
+  list-style-type: none;
+  margin-bottom: 1rem;
+}
+
+li::before {
+  content: "•";
+  margin-right: 0.5rem;
+  color: #00b0ff;
+}
+
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Tidal Hypothesis </h1>
+  </header>
+  <main>
+    <div class="container">
+      <div class="earth"></div>
+      <div class="moon"></div>
+    </div>
+    <div class="explanation">
+      <h2>Tidal Hypothesis</h2>
+      <p>The tidal hypothesis is a theory that explains the formation of the Moon.
+         According to this theory, the Moon was formed from debris left over after a Mars-sized object collided with the early Earth. This collision caused material from the Earth to be ejected into space, which eventually formed the Moon. The tidal force, which is responsible for the ocean tides on Earth, plays a role in slowing down the Earth's rotation over time.
+          The tidal hypothesis is supported by various pieces of evidence, such as the similarity between the chemical composition of the Moon and Earth's mantle, and the Moon's low density
+          .<br>The tidal hypothesis proposes that the Moon was formed from debris left over after a Mars-sized object collided with the early Earth. The collision caused material from the Earth to be ejected into space, which eventually formed the Moon.</p>
+      <h2>Formula</h2>
+      <p>F = (2GmM)/(d^3)</p>
+      <ul>
+        <li>F = tidal force</li>
+        <li>G = gravitational constant</li>
+        <li>m = mass of the Moon</li>
+        <li>M = mass of the Earth</li>
+        <li>d = distance between the Earth and the Moon</li>
+      </ul>
+      <p>The tidal force is responsible for the ocean tides on Earth and plays a role in slowing down the Earth's rotation over time.</p>
+    </div>
+  </main>
+  <script>
+const canvas = document.getElementById("canvas");
+const context = canvas.getContext("2d");
+
+let width = canvas.width = window.innerWidth;
+let height = canvas.height = window.innerHeight;
+
+let cx = width / 2;
+let cy = height / 2;
+
+let moonRadius = 50;
+let moonDistance = 250;
+
+let tideHeight = 0;
+
+let tideAmplitude = 20;
+let tidePeriod = 100;
+let tideSpeed = 0.01;
+
+let time = 0;
+
+function animate() {
+  context.clearRect(0, 0, width, height);
+
+  let moonX = cx + Math.cos(time) * moonDistance;
+  let moonY = cy + Math.sin(time) * moonDistance;
+
+  let tideX = moonX;
+  let tideY = cy + moonRadius + tideHeight;
+
+  context.beginPath();
+  context.arc(moonX, moonY, moonRadius, 0, Math.PI * 2);
+  context.fillStyle = "#fff";
+  context.fill();
+
+  context.beginPath();
+  context.arc(tideX, tideY, moonRadius, 0, Math.PI * 2);
+  context.fillStyle = "#fff";
+  context.fill();
+
+  context.beginPath();
+  context.moveTo(0, cy + moonRadius);
+  for (let x = 0; x <= width; x += 10) {
+    let y = cy + moonRadius + Math.sin(x / tidePeriod + time) * tideAmplitude;
+    context.lineTo(x, y);
+  }
+  context.lineTo(width, cy + moonRadius);
+  context.lineTo(width, height);
+  context.lineTo(0, height);
+  context.closePath();
+  context.fillStyle = "#039be5";
+  context.fill();
+
+  tideHeight = Math.sin(time * 2 * tideSpeed) * tideAmplitude / 2;
+
+  time += 0.01;
+
+  requestAnimationFrame(animate); // Request another frame
+}
+
+animate();
+
+window.addEventListener("resize", function() {
+  width = canvas.width = window.innerWidth;
+  height = canvas.height = window.innerHeight;
+
+  cx = width / 2;
+  cy = height / 2;
+});
+
+  </script>
+</body>
+</html>
