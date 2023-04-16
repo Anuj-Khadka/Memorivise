@@ -1,0 +1,108 @@
+{% extends 'base.html' %} {% block title%}
+<title>Simulations</title>
+{% endblock title%} {% block body%}
+<div class="container">
+  <hr />
+  <h2 class="text-center">Simulations</h2>
+  <hr />
+  <div class="container-fluid row py-4 mb-5 d-flex gap-3 justify-content-center">
+    <div class="col-lg-4 card" style="width: 18rem" id="classes">
+      <div class="card-body">
+        <h4 class="card-title">Solar System</h4>
+        <a href="/solar" class="card-link">View this </a>
+      </div>
+    </div>
+
+    <div class="col-lg-4 card" style="width: 18rem" id="classes">
+      <div class="card-body">
+        <h4 class="card-title">Simple Pendulum</h4>
+        <a href="/simplependulum" class="card-link">View this </a>
+      </div>
+    </div>
+
+    <div class="col-lg-4 card" style="width: 18rem" id="classes">
+      <div class="card-body">
+        <h4 class="card-title">Ohm's Law</h4>
+        <a href="/ohm" class="card-link">View this </a>
+      </div>
+    </div>
+
+    <div class="col-lg-4 card" style="width: 18rem" id="classes">
+      <div class="card-body">
+        <h4 class="card-title">Tidal hypothesis</h4>
+        <a href="/tidal" class="card-link">View this </a>
+      </div>
+    </div>
+
+    <div class="col-lg-4 card" style="width: 18rem" id="classes">
+      <div class="card-body">
+        <h4 class="card-title">Force</h4>
+        <a href="/force" class="card-link">View this </a>
+      </div>
+    </div>
+
+  </div>
+</div>
+<!-- <style>
+    canvas {
+  display: block;
+  margin: auto;
+}
+  </style>
+  <script>
+    let ball;
+let gravity;
+
+function setup() {
+  createCanvas(600, 400);
+  ball = new Ball(100, 100, 30);
+  gravity = createVector(0, 0.1);
+}
+
+function draw() {
+  background(220);
+  ball.applyForce(gravity);
+  ball.update();
+  ball.display();
+}
+
+class Ball {
+  constructor(x, y, r) {
+    this.position = createVector(x, y);
+    this.velocity = createVector(0, 0);
+    this.acceleration = createVector(0, 0);
+    this.mass = 1;
+    this.radius = r;
+  }
+
+  applyForce(force) {
+    let f = force.copy().div(this.mass);
+    this.acceleration.add(f);
+  }
+
+  update() {
+    this.velocity.add(this.acceleration);
+    this.position.add(this.velocity);
+    this.acceleration.set(0, 0);
+  }
+
+  display() {
+    stroke(0);
+    fill(175);
+    ellipse(this.position.x, this.position.y, this.radius * 2);
+  }
+}
+
+  </script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.0/p5.min.js"></script> -->
+<style>
+  #classes {
+    transition: box-shadow 0.2s;
+  }
+
+  #classes:hover {
+    /* transform: translate(0, -0.5rem); */
+    box-shadow: 2px 3px 7px 1px #2b2b2b34;
+  }
+</style>
+{% endblock body %}

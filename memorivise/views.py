@@ -104,9 +104,9 @@ def contact():
     return render_template("contact.html", user=current_user)
 
 
-# @views.route("/resources",)
-# def resources():
-#     return render_template("resources.html")
+@views.route("/resources",)
+def resources():
+    return render_template("resources.html")
 
 
 @views.route('/memorivise', methods=['POST', 'GET'])
@@ -134,16 +134,35 @@ def memorivise_test():
     if request.method == 'POST':
         user_data = request.form['memorivise_test'].lower()
 
-        # this is case insensetive check
-        result = db.session.query(MemoriviseDB).filter(
-            MemoriviseDB.document.ilike(user_data))
+        # Check if user input matches the stored word
+        result = db.session.query(MemoriviseDB).filter(MemoriviseDB.document.ilike(user_data)).first()
+        
         if result:
-            flash("yes it is correct", category="success")
-            return redirect("/memorivise")
+            flash("Correct! You remembered the word.", category="success")
         else:
-            flash("no try again", category="error")
-            return redirect("/memorivise")
+            # Compare user input with each word in the stored document
+            stored_doc = db.session.query(MemoriviseDB).first().document.lower()
+            stored_words = stored_doc.split()
+            user_words = user_data.split()
+            wrong_words = []
+            
+            for i in range(len(stored_words)):
+                if i >= len(user_words):
+                    wrong_words.append(stored_words[i])
+                elif stored_words[i] != user_words[i]:
+                    wrong_words.append(stored_words[i])
+            
+            if len(wrong_words) == 0:
+                flash("Correct! You remembered the word.", category="success")
+            else:
+                flash(f"Incorrect. You missed or got the following word(s) wrong: {', '.join(wrong_words)}.", category="error")
+                
+        return redirect("/memorivise")
+    
     return render_template('memorivise.html', user=current_user)
+
+
+
 
 
 @views.route("/memorivise/delete/<int:id>")
@@ -223,6 +242,50 @@ def learning():
 @views.route('/quiz')
 def quiz():
     return render_template('quiz.html', user=current_user)
+
+@views.route('/class8')
+def class8():
+    return render_template('class8.html', user=current_user)
+
+@views.route('/class9')
+def class9():
+    return render_template('class9.html', user=current_user)
+
+@views.route('/class10')
+def class10():
+    return render_template('class10.html', user=current_user)
+
+@views.route('/class11science')
+def class11science():
+    return render_template('class11science.html', user=current_user)
+
+@views.route('/simulations')
+def simulations():
+    return render_template('simulations.html', user=current_user)
+
+@views.route('/sat')
+def sat():
+    return render_template('sat.html', user=current_user)
+
+@views.route('/solar')
+def solar():
+    return render_template('solar.html', user=current_user)
+
+@views.route('/simplependulum')
+def simplependulum():
+    return render_template('simplependulum.html', user=current_user)
+
+@views.route('/ohm')
+def ohm():
+    return render_template('ohm.html', user=current_user)
+
+@views.route('/force')
+def force():
+    return render_template('force.html', user=current_user)
+
+@views.route('/tidal')
+def tidal():
+    return render_template('tidal.html', user=current_user)
 
 
 @views.route('/transcribe')
