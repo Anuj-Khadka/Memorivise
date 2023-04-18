@@ -239,9 +239,9 @@ def learning():
     return render_template('learning.html', user=current_user)
 
 
-@views.route('/quiz')
-def quiz():
-    return render_template('quiz.html', user=current_user)
+@views.route('/plustwo')
+def plustwo():
+    return render_template('plustwo.html', user=current_user)
 
 @views.route('/class8')
 def class8():
@@ -286,6 +286,14 @@ def force():
 @views.route('/tidal')
 def tidal():
     return render_template('tidal.html', user=current_user)
+
+@views.route('/medical')
+def medical():
+    return render_template('medical.html', user=current_user)
+
+@views.route('/engi')
+def engi():
+    return render_template('engi.html', user=current_user)
 
 
 @views.route('/transcribe')
