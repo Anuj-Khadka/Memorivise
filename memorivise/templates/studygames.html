@@ -1,10 +1,32 @@
 {% extends 'base.html' %} {% block title%}
-<title>Study games</title>
+<title>Entrance - Memorivise</title>
 {% endblock title%} {% block body%}
 <hr />
-<h2 class="text-center">Study games</h2>
+<h2 class="text-center">Entrance - Memorivise</h2>
 <hr />
-<div class="icon-container">
+<div class="container-fluid row py-4 mb-5 d-flex gap-3 justify-content-center">
+  <div class="col-lg-4 card" style="width: 18rem" id="classes">
+    <div class="card-body">
+      <h4 class="card-title">+2 Entrance</h4>
+      <a href="/plustwo" class="card-link">View this </a>
+    </div>
+  </div>
+
+  <div class="col-lg-4 card" style="width: 18rem" id="classes">
+    <div class="card-body">
+      <h4 class="card-title">Medical</h4>
+      <a href="/medical" class="card-link">View this </a>
+    </div>
+  </div>
+
+  <div class="col-lg-4 card" style="width: 18rem" id="classes">
+    <div class="card-body">
+      <h4 class="card-title">IOE</h4>
+      <a href="/engi" class="card-link">View this </a>
+    </div>
+  </div>
+  </div>
+<!-- <div class="icon-container">
     <figure>
       <a href="/quiz"><img src="..\static\img\quiz.png"></a>
       <figcaption><b>Quizzes</b></figcaption>
@@ -17,8 +39,8 @@
         <a href="#"><img src="..\static\img\simulation.jpg"></a>
         <figcaption><b>Simulation Game</b></figcaption>
       </figure>
-  </div>
-  <style>
+  </div> -->
+  <!-- <style>
       img {
     float: left;
     height: 400px;
@@ -48,5 +70,15 @@
     margin-top: 15px;
     margin-bottom: 15px;
   }
+  </style> -->
+  <style>
+    #classes {
+      transition: box-shadow 0.2s;
+    }
+  
+    #classes:hover {
+      /* transform: translate(0, -0.5rem); */
+      box-shadow: 2px 3px 7px 1px #2b2b2b34;
+    }
   </style>
 {% endblock body %}

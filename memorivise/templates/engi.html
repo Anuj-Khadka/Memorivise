@@ -1,0 +1,224 @@
+{% extends 'base.html' %}
+
+{% block title%}
+
+<title>Engineering - Memorivise</title>
+{% endblock title %}
+{% block body %}
+
+<div class="container">
+  <hr />
+  <h2 class="text-center">Engineering Entrance MCQ's</h2>
+  <hr />
+  <div id="quiz" class="px-5 bg-dark-subtle py-5 rounded">
+    <h4 id="question"></h4>
+    <ul id="choices"></ul>
+    <div class="d-flex justify-content-between">
+      <button id="previous" class="btn btn-secondary" disabled>Previous</button>
+      <button id="submit" class="btn btn-primary">Submit</button>
+      <button id="next" class="btn btn-primary">Next</button>
+    </div>
+    <p id="response"></p>
+    <p id="score"></p>
+  </div>
+</div>
+<style>
+  #quiz {
+    margin: auto;
+  }
+
+  h1,
+  h2 {
+    margin-bottom: 10px;
+  }
+
+  #choices {
+    list-style-type: none;
+    padding: 0;
+  }
+
+  #choices li {
+    margin-bottom: 10px;
+  }
+
+  .btn-primary {
+    margin-top: 10px;
+    padding: 10px;
+    background-color: #4caf50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+
+  .btn-secondary {
+    margin-top: 10px;
+    padding: 10px;
+    background-color: #6c757d;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+
+  .btn-primary:hover, .btn-secondary:hover {
+    background-color: #3e8e41;
+  }
+
+  .correct {
+    background-color: #28a745;
+  }
+
+  .incorrect {
+    background-color: #dc3545;
+  }
+</style>
+<script>
+var quizData = [
+{
+question: "1. Which of the following is the correct expression for Ohm's law?",
+choices: ["V = IR", "I = VR", "R = VI", "V = IR^2"],
+answer: "V = IR"
+},
+{
+question: "2. The Young's modulus of a material is a measure of its",
+choices: ["tensile strength", "shear strength", "elastic modulus", "yield strength"],
+answer: "elastic modulus"
+},
+{
+question: "3. The efficiency of a Carnot cycle is given by",
+choices: ["(T2 - T1) / T2", "(T1 - T2) / T1", "T1 / (T2 - T1)", "T2 / (T2 - T1)"],
+answer: "(T2 - T1) / T2"
+},
+{
+question: "4. Which of the following elements is a metalloid?",
+choices: ["Oxygen", "Silicon", "Nitrogen", "Chlorine"],
+answer: "Silicon"
+},
+{
+question: "5. Which of the following waves can travel through a vacuum?",
+choices: ["Sound waves", "Light waves", "Radio waves", "X-rays"],
+answer: "Light waves"
+},
+{
+question: "6. The speed of light in a medium is given by",
+choices: ["c / n", "n / c", "c x n", "n x c^2"],
+answer: "c / n"
+},
+{
+question: "7. The pH of a solution with a hydrogen ion concentration of 10^-5 M is",
+choices: ["5", "6", "7", "8"],
+answer: "5"
+},
+{
+question: "8. The half-life of a radioactive material is 10 days. If the initial amount of the material is 100 g, what will be its mass after 30 days?",
+choices: ["25 g", "12.5 g", "6.25 g", "3.125 g"],
+answer: "6.25 g"
+},
+{
+question: "9. The equation of a plane passing through the point (1,2,3) and perpendicular to the vector (2,3,4) is given by",
+choices: ["2x + 3y + 4z = 11", "2x - 3y + 4z = 7", "2x + 3y - 4z = 5", "2x - 3y - 4z = -3"],
+answer: "2x + 3y - 4z = 5"
+},
+{
+question: "10. The time period of a simple pendulum is given by",
+choices: ["T = 2π√(l/g)", "T = 2π√(g/l)", "T = π√(2l/g)", "T = π√(g/2l)"],
+answer: "T = 2π√(l/g)"
+},
+{
+question: "11. What is the slope of a line perpendicular to the line with equation y = 3x + 2?",
+choices: ["-1/3", "-3", "1/3", "3"],
+answer: "-1/3"
+},
+];
+
+let currentQuestion = 0;
+let score = 0;
+
+let questionEl = document.getElementById("question");
+let choicesEl = document.getElementById("choices");
+let submitBtn = document.getElementById("submit");
+let previousBtn = document.getElementById("previous");
+let nextBtn = document.getElementById("next");
+let scoreEl = document.getElementById("score");
+let responseEl = document.getElementById("response");
+
+function loadQuestion() {
+  let currentQuizData = quizData[currentQuestion];
+  questionEl.innerHTML = currentQuizData.question;
+  choicesEl.innerHTML = "";
+  for (var i = 0; i < currentQuizData.choices.length; i++) {
+    let choice = currentQuizData.choices[i];
+    let li = document.createElement("li");
+    li.innerHTML = `
+      <label for="${choice}_element">
+        <input type='radio' name='choice' id="${choice}_element" value=${choice}>${choice}</label>`;
+choicesEl.appendChild(li);
+}
+}
+
+function checkAnswer() {
+let selectedAnswer = document.querySelector('input[name="choice"]:checked');
+if (!selectedAnswer) {
+responseEl.innerHTML = "Please select an answer!";
+return;
+}
+let answer = selectedAnswer.value;
+if (answer === quizData[currentQuestion].answer) {
+score++;
+responseEl.innerHTML = "Correct!";
+selectedAnswer.parentElement.classList.add("correct");
+} else {
+  responseEl.innerHTML = `Incorrect. The correct answer was ${quizData[currentQuestion].answer}`;
+
+selectedAnswer.parentElement.classList.add("incorrect");
+}
+submitBtn.disabled = true;
+for (var i = 0; i < choicesEl.children.length; i++) {
+choicesEl.children[i].querySelector('input[type="radio"]').disabled = true;
+}
+}
+
+function showNextQuestion() {
+currentQuestion++;
+if (currentQuestion >= quizData.length - 1) {
+nextBtn.disabled = true;
+}
+if (currentQuestion > 0) {
+previousBtn.disabled = false;
+}
+loadQuestion();
+resetQuiz();
+}
+
+function showPreviousQuestion() {
+currentQuestion--;
+if (currentQuestion <= 0) {
+previousBtn.disabled = true;
+}
+if (currentQuestion < quizData.length - 1) {
+nextBtn.disabled = false;
+}
+loadQuestion();
+resetQuiz();
+}
+
+function resetQuiz() {
+responseEl.innerHTML = "";
+submitBtn.disabled = false;
+for (var i = 0; i < choicesEl.children.length; i++) {
+choicesEl.children[i].classList.remove("correct");
+choicesEl.children[i].classList.remove("incorrect");
+choicesEl.children[i].querySelector('input[type="radio"]').disabled = false;
+choicesEl.children[i].querySelector('input[type="radio"]').checked = false;
+}
+}
+
+loadQuestion();
+resetQuiz();
+
+submitBtn.addEventListener("click", checkAnswer);
+nextBtn.addEventListener("click", showNextQuestion);
+previousBtn.addEventListener("click", showPreviousQuestion);
+</script>
+{% endblock body %}

@@ -1,0 +1,338 @@
+{% extends 'base.html' %}
+
+{% block title%}
+
+<title>Medical - Memorivise</title>
+{% endblock title %}
+{% block body %}
+
+<div class="container">
+  <hr />
+  <h2 class="text-center">+2 Entrance MCQ's</h2>
+  <hr />
+  <div id="quiz" class="px-5 bg-dark-subtle py-5 rounded">
+    <h4 id="question"></h4>
+    <ul id="choices"></ul>
+    <div class="d-flex justify-content-between">
+      <button id="previous" class="btn btn-secondary" disabled>Previous</button>
+      <button id="submit" class="btn btn-primary">Submit</button>
+      <button id="next" class="btn btn-primary">Next</button>
+    </div>
+    <p id="response"></p>
+    <p id="score"></p>
+  </div>
+</div>
+<style>
+  #quiz {
+    margin: auto;
+  }
+
+  h1,
+  h2 {
+    margin-bottom: 10px;
+  }
+
+  #choices {
+    list-style-type: none;
+    padding: 0;
+  }
+
+  #choices li {
+    margin-bottom: 10px;
+  }
+
+  .btn-primary {
+    margin-top: 10px;
+    padding: 10px;
+    background-color: #4caf50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+
+  .btn-secondary {
+    margin-top: 10px;
+    padding: 10px;
+    background-color: #6c757d;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+
+  .btn-primary:hover, .btn-secondary:hover {
+    background-color: #3e8e41;
+  }
+
+  .correct {
+    background-color: #28a745;
+  }
+
+  .incorrect {
+    background-color: #dc3545;
+  }
+</style>
+<script>
+var quizData = [
+{
+question: "1. Which of the following is a type of blood cell responsible for carrying oxygen throughout the body?",
+choices: ["Red blood cell", "White blood cell", "Platelet", "Neuron"],
+answer: "Red blood cell",
+},
+
+{
+question: "2. What is the name of the condition in which the body's immune system attacks its own tissues?",
+choices: ["Lupus", "Asthma", "Arthritis", "Epilepsy"],
+answer: "Lupus",
+},
+
+{
+question: "3. What is the name of the hormone responsible for regulating blood sugar levels in the body?",
+choices: ["Insulin", "Glucagon", "Estrogen", "Testosterone"],
+answer: "Insulin",
+},
+
+{
+question: "4. What is the name of the structure that connects the kidney to the bladder?",
+choices: ["Ureter", "Urethra", "Prostate gland", "Vas deferens"],
+answer: "Ureter",
+},
+
+{
+question: "5. Which of the following is a type of mental disorder characterized by excessive worry and anxiety?",
+choices: ["Depression", "Bipolar disorder", "Schizophrenia", "Generalized anxiety disorder"],
+answer: "Generalized anxiety disorder",
+},
+
+{
+question: "6. What is the name of the valve that separates the left atrium and ventricle in the heart?",
+choices: ["Tricuspid valve", "Mitral valve", "Aortic valve", "Pulmonary valve"],
+answer: "Mitral valve",
+},
+
+{
+question: "7. What is the name of the condition in which there is a loss of bone density, making bones more prone to fracture?",
+choices: ["Osteoporosis", "Arthritis", "Rheumatoid arthritis", "Scoliosis"],
+answer: "Osteoporosis",
+},
+
+{
+question: "8. What is the name of the condition in which the body's immune system attacks the lining of the small intestine?",
+choices: ["Celiac disease", "Crohn's disease", "Ulcerative colitis", "Irritable bowel syndrome"],
+answer: "Celiac disease",
+},
+
+{
+question: "9. Which of the following is a type of cell responsible for transmitting signals throughout the nervous system?",
+choices: ["Neuron", "Red blood cell", "White blood cell", "Platelet"],
+answer: "Neuron",
+},
+
+{
+question: "10. What is the name of the hormone responsible for regulating the sleep-wake cycle?",
+choices: ["Melatonin", "Serotonin", "Dopamine", "Adrenaline"],
+answer: "Melatonin",
+},
+
+{
+question: "11. What is the name of the condition in which there is a buildup of fatty deposits in the arteries, increasing the risk of heart attack and stroke?",
+choices: ["Atherosclerosis", "Arteriosclerosis", "Thrombosis", "Embolism"],
+answer: "Atherosclerosis",
+},
+
+{
+question: "12. What is the name of the hormone responsible for stimulating milk production in the breasts?",
+choices: ["Prolactin", "Estrogen", "Testosterone", "Progesterone"],
+answer: "Prolactin",
+},
+
+{
+question: "13. What is the name of the hormone produced by the pancreas that helps regulate blood sugar levels?",
+choices: ["Insulin", "Glucagon", "Thyroxine", "Adrenaline"],
+answer: "Insulin",
+},
+
+{
+question: "14. What is the name of the condition in which there is a deficiency of red blood cells or hemoglobin in the blood, leading to fatigue and weakness?",
+choices: ["Anemia", "Leukemia", "Hemophilia", "Thalassemia"],
+answer: "Anemia",
+},
+
+{
+question: "15. What is the name of the valve located between the left atrium and left ventricle of the heart?",
+choices: ["Mitral valve", "Aortic valve", "Tricuspid valve", "Pulmonary valve"],
+answer: "Mitral valve",
+},
+
+{
+question: "16. What is the name of the process by which cells convert glucose into energy in the presence of oxygen?",
+choices: ["Cellular respiration", "Photosynthesis", "Fermentation", "Glycolysis"],
+answer: "Cellular respiration",
+},
+
+{
+question: "17. What is the name of the large muscle that separates the chest cavity from the abdominal cavity and aids in breathing?",
+choices: ["Diaphragm", "Rectus abdominis", "Pectoralis major", "Trapezius"],
+answer: "Diaphragm",
+},
+
+{
+question: "18. What is the name of the condition in which there is a loss of bone mass and density, leading to an increased risk of fractures?",
+choices: ["Osteoporosis", "Osteoarthritis", "Rheumatoid arthritis", "Scoliosis"],
+answer: "Osteoporosis",
+},
+
+{
+question: "19. What is the name of the pigment responsible for the color of human skin, hair, and eyes?",
+choices: ["Melanin", "Carotene", "Hemoglobin", "Chlorophyll"],
+answer: "Melanin",
+},
+
+{
+question: "20. What is the name of the process by which plants use sunlight, carbon dioxide, and water to produce glucose and oxygen?",
+choices: ["Photosynthesis", "Cellular respiration", "Fermentation", "Glycolysis"],
+answer: "Photosynthesis",
+},
+{
+question: "21. What is the medical term for the condition commonly known as a heart attack?",
+choices: ["Myocardial infarction", "Stroke", "Angina pectoris", "Arrhythmia"],
+answer: "Myocardial infarction",
+},
+{
+question: "22. Which of the following is a gland in the endocrine system that regulates metabolism?",
+choices: ["Adrenal gland", "Pineal gland", "Thyroid gland", "Thymus gland"],
+answer: "Thyroid gland",
+},
+{
+question: "23. What is the name of the condition in which there is inflammation and swelling of the joints, causing pain and stiffness?",
+choices: ["Arthritis", "Osteoporosis", "Osteoarthritis", "Rheumatoid arthritis"],
+answer: "Arthritis",
+},
+{
+question: "24. Which of the following is a type of cancer that affects the blood and bone marrow?",
+choices: ["Leukemia", "Lymphoma", "Multiple myeloma", "Sarcoma"],
+answer: "Leukemia",
+},
+{
+question: "25. What is the name of the condition in which there is damage to the liver caused by excessive alcohol consumption?",
+choices: ["Hepatitis B", "Cirrhosis", "Jaundice", "Cholecystitis"],
+answer: "Cirrhosis",
+},
+{
+question: "26. Which of the following is a disorder that affects the immune system, causing inflammation and damage to various organs and tissues in the body?",
+choices: ["Lupus", "Multiple sclerosis", "Parkinson's disease", "Alzheimer's disease"],
+answer: "Lupus",
+},
+{
+question: "27. What is the name of the condition in which there is a loss of bone density, making bones more prone to fractures?",
+choices: ["Osteoporosis", "Osteomalacia", "Osteomyelitis", "Osteoarthritis"],
+answer: "Osteoporosis",
+},
+{
+question: "28. Which of the following is a type of cell that is responsible for carrying oxygen in the blood?",
+choices: ["Platelets", "Red blood cells", "White blood cells", "Neurons"],
+answer: "Red blood cells",
+},
+{
+question: "29. What is the name of the condition in which there is a blockage of blood flow to the brain, causing brain damage?",
+choices: ["Stroke", "Transient ischemic attack", "Hemorrhage", "Aneurysm"],
+answer: "Stroke",
+},
+{
+question: "30. Which of the following is a type of medication that is used to treat high blood pressure?",
+choices: ["Antibiotics", "Beta blockers", "Antidepressants", "Antihistamines"],
+answer: "Beta blockers",
+},
+];
+
+let currentQuestion = 0;
+let score = 0;
+
+let questionEl = document.getElementById("question");
+let choicesEl = document.getElementById("choices");
+let submitBtn = document.getElementById("submit");
+let previousBtn = document.getElementById("previous");
+let nextBtn = document.getElementById("next");
+let scoreEl = document.getElementById("score");
+let responseEl = document.getElementById("response");
+
+function loadQuestion() {
+  let currentQuizData = quizData[currentQuestion];
+  questionEl.innerHTML = currentQuizData.question;
+  choicesEl.innerHTML = "";
+  for (var i = 0; i < currentQuizData.choices.length; i++) {
+    let choice = currentQuizData.choices[i];
+    let li = document.createElement("li");
+    li.innerHTML = `
+      <label for="${choice}_element">
+        <input type='radio' name='choice' id="${choice}_element" value=${choice}>${choice}</label>`;
+choicesEl.appendChild(li);
+}
+}
+
+function checkAnswer() {
+let selectedAnswer = document.querySelector('input[name="choice"]:checked');
+if (!selectedAnswer) {
+responseEl.innerHTML = "Please select an answer!";
+return;
+}
+let answer = selectedAnswer.value;
+if (answer === quizData[currentQuestion].answer) {
+score++;
+responseEl.innerHTML = "Correct!";
+selectedAnswer.parentElement.classList.add("correct");
+} else {
+  responseEl.innerHTML = `Incorrect. The correct answer was ${quizData[currentQuestion].answer}`;
+
+selectedAnswer.parentElement.classList.add("incorrect");
+}
+submitBtn.disabled = true;
+for (var i = 0; i < choicesEl.children.length; i++) {
+choicesEl.children[i].querySelector('input[type="radio"]').disabled = true;
+}
+}
+
+function showNextQuestion() {
+currentQuestion++;
+if (currentQuestion >= quizData.length - 1) {
+nextBtn.disabled = true;
+}
+if (currentQuestion > 0) {
+previousBtn.disabled = false;
+}
+loadQuestion();
+resetQuiz();
+}
+
+function showPreviousQuestion() {
+currentQuestion--;
+if (currentQuestion <= 0) {
+previousBtn.disabled = true;
+}
+if (currentQuestion < quizData.length - 1) {
+nextBtn.disabled = false;
+}
+loadQuestion();
+resetQuiz();
+}
+
+function resetQuiz() {
+responseEl.innerHTML = "";
+submitBtn.disabled = false;
+for (var i = 0; i < choicesEl.children.length; i++) {
+choicesEl.children[i].classList.remove("correct");
+choicesEl.children[i].classList.remove("incorrect");
+choicesEl.children[i].querySelector('input[type="radio"]').disabled = false;
+choicesEl.children[i].querySelector('input[type="radio"]').checked = false;
+}
+}
+
+loadQuestion();
+resetQuiz();
+
+submitBtn.addEventListener("click", checkAnswer);
+nextBtn.addEventListener("click", showNextQuestion);
+previousBtn.addEventListener("click", showPreviousQuestion);
+</script>
+{% endblock body %}

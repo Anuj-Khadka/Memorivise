@@ -1,0 +1,319 @@
+{% extends 'base.html' %}
+
+{% block title%}
+
+<title>Entrance - Memorivise</title>
+{% endblock title %}
+{% block body %}
+
+<div class="container">
+  <hr />
+  <h2 class="text-center">+2 Entrance MCQ's</h2>
+  <hr />
+  <div id="quiz" class="px-5 bg-dark-subtle py-5 rounded">
+    <h4 id="question"></h4>
+    <ul id="choices"></ul>
+    <div class="d-flex justify-content-between">
+      <button id="previous" class="btn btn-secondary" disabled>Previous</button>
+      <button id="submit" class="btn btn-primary">Submit</button>
+      <button id="next" class="btn btn-primary">Next</button>
+    </div>
+    <p id="response"></p>
+    <p id="score"></p>
+  </div>
+</div>
+<style>
+  #quiz {
+    margin: auto;
+  }
+
+  h1,
+  h2 {
+    margin-bottom: 10px;
+  }
+
+  #choices {
+    list-style-type: none;
+    padding: 0;
+  }
+
+  #choices li {
+    margin-bottom: 10px;
+  }
+
+  .btn-primary {
+    margin-top: 10px;
+    padding: 10px;
+    background-color: #4caf50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+
+  .btn-secondary {
+    margin-top: 10px;
+    padding: 10px;
+    background-color: #6c757d;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+
+  .btn-primary:hover, .btn-secondary:hover {
+    background-color: #3e8e41;
+  }
+
+  .correct {
+    background-color: #28a745;
+  }
+
+  .incorrect {
+    background-color: #dc3545;
+  }
+</style>
+<script>
+var quizData = [
+  {
+    question: "1. What is the molecular formula of water?",
+    choices: ["H2O", "CO2", "NH3", "CH4"],
+    answer: "H2O",
+  },
+  {
+    question: "2. What is the atomic number of oxygen?",
+    choices: ["6", "7", "8", "9"],
+    answer: "8",
+  },
+  {
+    question: "3. Which of the following is an example of a chemical change?",
+    choices: ["Melting ice", "Cutting paper", "Burning wood", "Mixing salt and water"],
+    answer: "Burning Wood",
+  },
+  {
+    question: "4. Which of the following is not a primary color of light?",
+    choices: ["Red", "Yellow", "Green", "Blue"],
+    answer: "Yello",
+  },
+  {
+    question: "5. Which of the following is a renewable energy source?",
+    choices: ["Coal", "Oil", "Solar", "Natural gas"],
+    answer: "Solar",
+  },
+  {
+    question: "6. Which of the following is a type of electromagnetic wave with the longest wavelength?",
+    choices: ["Gamma rays", "X-rays", "Infrared", "Radiowaves"],
+    answer: "Radiowaves",
+  },
+  {
+    question: "7. What is the SI unit of force?",
+    choices: ["Newton", "Joule", "Watt", "Meter"],
+    answer: "Newton",
+  },
+  {
+    question: "8. What is the smallest unit of an element that retains its properties?",
+    choices: ["Molecule", "Atom", "Cell", "Organelle"],
+    answer: "Atom",
+  },
+  {
+    question: "9. Which of the following is an example of a heterogeneous mixture?",
+    choices: ["Air", "Salt Water", "Milk", "Steel"],
+    answer: "Steel",
+  },
+  {
+question: "10. What is the process by which a solid changes directly into a gas?",
+choices: ["Sublimation", "Evaporation", "Condensation", "Melting"],
+answer: "Sublimation",
+},
+{
+question: "11. Which of the following is not a type of energy?",
+choices: ["Thermal", "Mechanical", "Sound", "Density"],
+answer: "Density",
+},
+{
+question: "12. Which of the following is an example of a simple machine?",
+choices: ["Screw", "Lever", "Wedge", "Nail"],
+answer: "Lever",
+},
+{
+question: "13. What is the chemical formula for glucose?",
+choices: ["C6H12O6", "H2SO4", "NaCl", "Fe2O3"],
+answer: "C6H12O6",
+},
+{
+question: "14. Which of the following is not a type of rock?",
+choices: ["Igneous", "Sedimentary", "Metamorphic", "Nitrogenous"],
+answer: "Nitrogenous",
+},
+{
+question: "15. What is the name of the process by which plants use sunlight to make their own food?",
+choices: ["Photosynthesis", "Respiration", "Fermentation", "Transpiration"],
+answer: "Photosynthesis",
+},
+{
+question: "16. Which of the following is a type of radioactive decay?",
+choices: ["Alpha", "Beta", "Gamma", "All of the above"],
+answer: "All of the above",
+},
+{
+question: "17. What is the name of the process by which plants release water vapor through their leaves?",
+choices: ["Transpiration", "Respiration", "Photosynthesis", "Fermentation"],
+answer: "Transpiration",
+},
+{
+question: "18. Which of the following is a measure of how much matter is in an object?",
+choices: ["Weight", "Volume", "Density", "Mass"],
+answer: "Mass",
+},
+{
+question: "19. What is the name of the process by which an electric current creates a magnetic field?",
+choices: ["Electromagnetism", "Gravity", "Strong nuclear force", "Weak nuclear force"],
+answer: "Electromagnetism",
+},
+{
+question: "20. Which of the following is an example of a chemical change?",
+choices: ["Melting ice", "Boiling water", "Burning wood", "Mixing salt and water"],
+answer: "Burning wood",
+},
+{
+question: "21. What is the name of the layer of gas surrounding the Earth?",
+choices: ["Mantle", "Atmosphere", "Core", "Crust"],
+answer: "Atmosphere",
+},
+{
+question: "22. Which of the following is not a type of rock?",
+choices: ["Igneous", "Sedimentary", "Metamorphic", "Metallic"],
+answer: "Metallic",
+},
+{
+question: "23. What is the name of the process by which an atom gains or loses electrons?",
+choices: ["Ionization", "Polarization", "Excitation", "Oxidation"],
+answer: "Ionization",
+},
+{
+question: "24. Which of the following is a type of chemical reaction in which two or more substances combine to form a single, more complex substance?",
+choices: ["Decomposition", "Combustion", "Synthesis", "Replacement"],
+answer: "Synthesis",
+},
+{
+question: "25. What is the name of the process by which plants use light energy to convert carbon dioxide and water into glucose?",
+choices: ["Photosynthesis", "Respiration", "Transpiration", "Fermentation"],
+answer: "Photosynthesis",
+},
+{
+question: "26. Which of the following is a type of energy that is stored within an object?",
+choices: ["Potential", "Kinetic", "Thermal", "Electrical"],
+answer: "Potential",
+},
+{
+question: "27. What is the name of the process by which rocks are moved from one location to another?",
+choices: ["Erosion", "Weathering", "Deposition", "Sedimentation"],
+answer: "Erosion",
+},
+{
+question: "28. Which of the following is not a type of microscope?",
+choices: ["Optical", "Electron", "Atomic", "Magnetic"],
+answer: "Magnetic",
+},
+{
+question: "29. What is the name of the process by which a solid changes directly into a gas?",
+choices: ["Sublimation", "Evaporation", "Condensation", "Deposition"],
+answer: "Sublimation",
+},
+{
+question: "30. Which of the following is not a type of cell in the human body?",
+choices: ["Muscle", "Nerve", "Blood", "Bone"],
+answer: "Blood",
+},
+];
+
+let currentQuestion = 0;
+let score = 0;
+
+let questionEl = document.getElementById("question");
+let choicesEl = document.getElementById("choices");
+let submitBtn = document.getElementById("submit");
+let previousBtn = document.getElementById("previous");
+let nextBtn = document.getElementById("next");
+let scoreEl = document.getElementById("score");
+let responseEl = document.getElementById("response");
+
+function loadQuestion() {
+  let currentQuizData = quizData[currentQuestion];
+  questionEl.innerHTML = currentQuizData.question;
+  choicesEl.innerHTML = "";
+  for (var i = 0; i < currentQuizData.choices.length; i++) {
+    let choice = currentQuizData.choices[i];
+    let li = document.createElement("li");
+    li.innerHTML = `
+      <label for="${choice}_element">
+        <input type='radio' name='choice' id="${choice}_element" value=${choice}>${choice}</label>`;
+choicesEl.appendChild(li);
+}
+}
+
+function checkAnswer() {
+let selectedAnswer = document.querySelector('input[name="choice"]:checked');
+if (!selectedAnswer) {
+responseEl.innerHTML = "Please select an answer!";
+return;
+}
+let answer = selectedAnswer.value;
+if (answer === quizData[currentQuestion].answer) {
+score++;
+responseEl.innerHTML = "Correct!";
+selectedAnswer.parentElement.classList.add("correct");
+} else {
+  responseEl.innerHTML = `Incorrect. The correct answer was ${quizData[currentQuestion].answer}`;
+
+selectedAnswer.parentElement.classList.add("incorrect");
+}
+submitBtn.disabled = true;
+for (var i = 0; i < choicesEl.children.length; i++) {
+choicesEl.children[i].querySelector('input[type="radio"]').disabled = true;
+}
+}
+
+function showNextQuestion() {
+currentQuestion++;
+if (currentQuestion >= quizData.length - 1) {
+nextBtn.disabled = true;
+}
+if (currentQuestion > 0) {
+previousBtn.disabled = false;
+}
+loadQuestion();
+resetQuiz();
+}
+
+function showPreviousQuestion() {
+currentQuestion--;
+if (currentQuestion <= 0) {
+previousBtn.disabled = true;
+}
+if (currentQuestion < quizData.length - 1) {
+nextBtn.disabled = false;
+}
+loadQuestion();
+resetQuiz();
+}
+
+function resetQuiz() {
+responseEl.innerHTML = "";
+submitBtn.disabled = false;
+for (var i = 0; i < choicesEl.children.length; i++) {
+choicesEl.children[i].classList.remove("correct");
+choicesEl.children[i].classList.remove("incorrect");
+choicesEl.children[i].querySelector('input[type="radio"]').disabled = false;
+choicesEl.children[i].querySelector('input[type="radio"]').checked = false;
+}
+}
+
+loadQuestion();
+resetQuiz();
+
+submitBtn.addEventListener("click", checkAnswer);
+nextBtn.addEventListener("click", showNextQuestion);
+previousBtn.addEventListener("click", showPreviousQuestion);
+</script>
+{% endblock body %}
