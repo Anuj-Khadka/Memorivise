@@ -17,7 +17,7 @@
           <img src="../static/img/books/english.png" class="card-img-top" alt="...">
           <div class="card-body">
             <h5 class="card-title">English</h5>
-            <a href="#" class="btn btn-primary">Read & Download</a>
+            <a href="../static/book/class11/CDC2077BS_Grade11English.pdf" class="btn btn-primary">Read & Download</a>
           </div>
         </div>
 
@@ -25,7 +25,7 @@
           <img src="../static/img/books/nepali.jpg" class="card-img-top" alt="...">
           <div class="card-body">
             <h5 class="card-title">Nepali</h5>
-            <a href="#" class="btn btn-primary">Read & Download</a>
+            <a href="../static/book/class11/CDC2077BS_Grade11Nepali.pdf" class="btn btn-primary">Read & Download</a>
           </div>
         </div>
 
@@ -33,7 +33,7 @@
           <img src="../static/img/books/social.png" class="card-img-top" alt="...">
           <div class="card-body">
             <h5 class="card-title">Social Studies</h5>
-            <a href="#" class="btn btn-primary" mx-1>Read & Download</a>
+            <a href="../static/book/class11/Social 11 The SR Zone.pdf" class="btn btn-primary" mx-1>Read & Download</a>
           </div>
         </div>
       </div>
@@ -48,11 +48,56 @@
           <img src="../static/img/books/ncertbio11.jpg" class="card-img-top" alt="...">
           <div class="card-body">
             <h5 class="card-title">NCERT Biology</h5>
-            <a href="#" class="btn btn-primary">Read & Download</a>
+            <a type="button"
+            data-bs-toggle="modal"
+            data-bs-target="#BiologyModal"class="btn btn-primary">Read & Download</a>
           </div>
         </div>
       </div>
     </div>
+
+    <div
+    class="modal fade"
+    id="BiologyModal"
+    tabindex="-1"
+    aria-labelledby="BiologyModalLabel"
+    aria-hidden="true"
+  >
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="BiologyModalLabel">Book Chapters</h5>
+          <button
+            type="button"
+            class="btn-close"
+            data-bs-dismiss="modal"
+            aria-label="Close"
+          ></button>
+        </div>
+        <div class="modal-body text-center" id="books">
+          <a href="../static/book/class11/bio/chapter01.pdf" >Chapter-1</a>
+          <a href="../static/book/class11/bio/chapter02.pdf" >Chapter-2</a>
+          <a href="../static/book/class11/bio/chapter03.pdf" >Chapter-3</a>
+          <a href="../static/book/class11/bio/chapter04.pdf" >Chapter-4</a><br>
+          <a href="../static/book/class11/bio/chapter05.pdf" >Chapter-5</a>
+          <a href="../static/book/class11/bio/chapter06.pdf" >Chapter-6</a>
+          <a href="../static/book/class11/bio/chapter07.pdf" >Chapter-7</a>
+          <a href="../static/book/class11/bio/chapter08.pdf" >Chapter-8</a><br>
+          <a href="../static/book/class11/bio/chapter09.pdf" >Chapter-9</a>
+          <a href="../static/book/class11/bio/chapter10.pdf" >Chapter-10</a>
+          <a href="../static/book/class11/bio/chapter11.pdf" >Chapter-11</a>
+          <a href="../static/book/class11/bio/chapter12.pdf" >Chapter-12</a><br>
+          <a href="../static/book/class11/bio/chapter13.pdf" >Chapter-13</a>
+          <a href="../static/book/class11/bio/chapter14.pdf" >Chapter-14</a>
+          <a href="../static/book/class11/bio/chapter15.pdf" >Chapter-15</a>
+          <a href="../static/book/class11/bio/chapter16.pdf" >Chapter-16</a><br>
+          <a href="../static/book/class11/bio/chapter17.pdf" >Chapter-17</a>
+          <a href="../static/book/class11/bio/chapter18.pdf" >Chapter-18</a>
+          <a href="../static/book/class11/bio/chapter19.pdf" >Chapter-19</a>  
+        </div>
+      </div>
+    </div>
+  </div>
 
   </div>
 </body>
@@ -85,6 +130,8 @@
         width: auto;
         margin-left: 20px;
     }
-
+    #books a{
+      margin-right: 5px;
+    }
 </style>
 {% endblock body %}
