@@ -4,47 +4,26 @@
 <hr />
 <h2 class="text-center">Learning Techniques</h2>
 <hr />
-<div class="icon-container">
-    <figure>
-      <a href="/simulations"><img src="..\static\img\simulearn.png"></a>
-      <figcaption><b>Simulations</b></figcaption>
-    </figure>
-    <figure>
-        <a href="#"><img src="..\static\img\simulearn.png"></a>
+<div class="container">
+  <div class="row">
+    <div class="col-md-4">
+      <figure class="text-center">
+        <a href="/simulations"><img src="../static/img/simulearn.png" class="img-fluid"></a>
+        <figcaption><b>Simulations</b></figcaption>
+      </figure>
+    </div>
+    <div class="col-md-4">
+      <figure class="text-center">
+        <a href="#"><img src="../static/img/simulearn.png" class="img-fluid"></a>
         <figcaption><b>Videos</b></figcaption>
       </figure>
+    </div>
+    <div class="col-md-4">
+      <figure class="text-center">
+        <a href="#"><img src="../static/img/simulearn.png" class="img-fluid"></a>
+        <figcaption><b>Experiments and Live Examples</b></figcaption>
+      </figure>
+    </div>
   </div>
-  <style>
-      img {
-    float: left;
-    height: 400px;
-    width: 400px;
-    border-radius: 20%;
-  }
-
-  .icon-container {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-
-  .icon-container figure {
-    margin-right: 70px;
-    margin-bottom: 15px;
-    margin-left: 70px;
-    text-align: center;
-  }
-
-  .icon-container img:hover {
-    opacity: 0.7;
-    cursor: pointer;
-    /* transform: scale(1.1); */
-  }
-
-  .icon-container figcaption {
-    font-size: 15px;
-    margin-top: 15px;
-    margin-bottom: 15px;
-  }
-  </style>
+</div>
 {% endblock body %}
