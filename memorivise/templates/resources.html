@@ -30,48 +30,65 @@
   
 </body>
 <style>
-  h1 {
-    text-align: center;
-  }
+h1 {
+      text-align: center;
+    }
 
-  header {
-    border: solid black;
-    margin: 0;
-    padding: 0;
-  }
+    header {
+      border: solid black;
+      margin: 0;
+      padding: 0;
+    }
 
-  * {
-    background-color: #F5F5F5;
-  }
+    * {
+      background-color: #F5F5F5;
+    }
 
-  img {
-    float: left;
-    height: 400px;
-    width: 290px;
-  }
+    img {
+      float: left;
+      height: 400px;
+      width: 290px;
+    }
 
-  .icon-container {
-    display: flex;
-  }
+    .icon-container {
+      display: flex;
+    }
 
-  .icon-container figure {
-    margin-right: 70px;
-    margin-bottom: 15px;
-    margin-left: 70px;
-    text-align: center;
-  }
+    .icon-container figure {
+      margin-right: 70px;
+      margin-bottom: 15px;
+      margin-left: 70px;
+      text-align: center;
+    }
 
-  .icon-container img:hover {
-    opacity: 0.7;
-    cursor: pointer;
-    /* transform: scale(1.1); */
-  }
+    .icon-container img:hover {
+      opacity: 0.7;
+      cursor: pointer;
+    }
 
-  .icon-container figcaption {
-    font-size: 15px;
-    margin-top: 15px;
-    margin-bottom: 15px;
-  }
+    .icon-container figcaption {
+      font-size: 15px;
+      margin-top: 15px;
+      margin-bottom: 15px;
+    }
+
+    /* Styles for mobile devices */
+    @media (max-width: 600px) {
+      img {
+        float: none;
+        height: auto;
+        width: 100%;
+      }
+
+      .icon-container {
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .icon-container figure {
+        margin: 15px 0;
+      }
+    }
 </style>
 
 </html>
