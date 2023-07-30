@@ -24,7 +24,7 @@
   </div>
       <div class="mt-3">
       <a id="transcribe-btn" class="btn btn-secondary me-2">Start Recording</a>
-      <button id="stop-btn" class="btn btn-secondary" type="submit"> Submit Problem </button>
+      <button id="stop-btn" class="btn btn-secondary" type="submit"> Submit</button>
     </div>
     </form>
 
@@ -123,6 +123,18 @@
                             // console.log(text)
                         });
                 });
+
+                transcribeBtn.addEventListener("click", ()=>{
+                  let recordCounter = setInterval(() => {
+                    transcribeBtn.innerText = "Recording...";
+                    setTimeout(() => {
+                      clearInterval(recordCounter);
+                      transcribeBtn.innerText = "Start Recording";
+                    }, 15000);
+                    // }
+                  }, 1000);
+                })
+
               </script>
               </html>
 {% endblock body %}
