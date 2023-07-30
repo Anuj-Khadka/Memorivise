@@ -120,6 +120,7 @@ def Memorivise():
         try:
             db.session.add(new_memorevise)
             db.session.commit()
+            flash("Note Added", category="success")
             return redirect('/memorivise')
         except:
             return "there was some problem adding the content."
