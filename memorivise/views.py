@@ -268,7 +268,7 @@ def simulations():
 def sat():
     return render_template('sat.html', user=current_user)
 
-@views.route('/solar')
+@views.route('/simulations/solar')
 def solar():
     return render_template('solar.html', user=current_user)
 
