@@ -205,7 +205,7 @@ def Books():
     return render_template('books.html', user=current_user)
 
 
-@views.route('/science')
+@views.route('/books/12/science')
 def Science():
     return render_template('science.html', user=current_user)
 
